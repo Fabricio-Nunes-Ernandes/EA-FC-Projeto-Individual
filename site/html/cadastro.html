@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EA FC</title>
+  <link rel="stylesheet" href="../css/cadastro.css">
+  <link rel="stylesheet" href="../css/geral.css">
+  
+  
+  <link rel="icon" href="../img/ea logo.png">
+</head>
+
+<body>
+  <div class="header">
+    <img src="../img/ea logo.png" />
+
+    
+      <div class="navbar" id="div_navbar">
+        <a href="./home.html">Home</a>
+        <a href=" ./calculadora.html">Simule aqui</a>
+        <a href="./faq.html">FAQ</a>
+      </div>
+
+      <div class="login">
+        <a href="./login.html">Login</a>
+      </div>
+      <div class="cadastro">
+        <a href=" ./cadFuncionario.html">Cadastro</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="Cadastro_Funcionario fade-in">
+
+    <div id="imgCadastro"></div>
+
+    <div class="container">
+      <div class="titulo">Cadastro</div>
+      
+      <div class="boxSignIn">
+        <p class="p">Nome:</p>
+        <input type="text" id="ipt_nome">
+        
+        
+  
+      </div>
+      
+      <div class="boxSignIn">
+        <p class="p">Celular:</p>
+        <input type="text" id="ipt_celular">
+        
+        
+        <p class="p">Email:</p>
+        <input type="text" id="ipt_email">
+        
+        
+        <p class="txtSenha p">Senha:</p>
+        <p class="txtSenha p">Confirmação senha:</p>
+        
+        <input class="boxSenha" type="text" id="ipt_senha">
+        <input class="boxSenha" type="text" id="ipt_senha_confirmacao">
+        
+    
+        
+      </div>
+      <div class="output_mensagem">
+        <div id="div_mensagem_celular"></div>
+        <div id="div_mensagem_email"></div>
+        <div id="div_mensagem_senha"></div>
+        <div id="div_mensagem_senha_confirmacao"></div>
+      </div>
+      
+      <button class="buttonCadastro" onclick="cadastrar()">ENVIAR</button>
+        
+      
+
+    </div>
+
+    <footer>
+      <hr>
+      <div class="rodape">
+        <img class="safelight2" src="../assets/fotos/logo1.png">
+        <p> © 2024 Fabricio. Todos os direitos reservados.</p>
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>
+<script src="../js/cadastro.js"></script>
