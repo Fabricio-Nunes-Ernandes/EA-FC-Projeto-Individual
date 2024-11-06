@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Cadastro</title>
     
     <link rel="stylesheet" href="../css/cadastro.css">
     <link rel="icon" href="../img/ea logo.png">
@@ -15,8 +15,8 @@
         <img src="../img/ea logo.png" alt="">
         
         <ul class="navbar">
-          <li class="agora">
-            <a href="#">Inicial</a>
+          <li >
+            <a href="home.html">Inicial</a>
           </li>
           <li>
             <a href="simulador.html">Simulador</a>
@@ -25,76 +25,62 @@
           <li>
             <a href="login.html">Login</a>
           </li>
-          <li>
-            <a href="cadastro.html">Cadastro</a>
+          <li class="agora">
+            <a href="#">Cadastro</a>
           </li>
         </ul>
       </div>
     </div>
   
-   
-      <div class="container">
+    <p class="titulo">Cadastro</p>
+      <div class="containerbody">
+        
         <div class="capa">
       
     </div>
   
     <div class="social">
-      <div class="container">
+      <div class="containerbody">
         <div class="boxes">
-          <div class="box">
-            
-           
-            
-            
-      
-          </div>
+        
           
-          <div class="boxSignIn">
+          
             <p class="p">Nome:</p>
             <input type="text" id="ipt_nome">
             <p class="p">Celular:</p>
             <input type="text" id="ipt_celular">
-            
+            <div class="output_mensagem">
+              <div id="div_mensagem_celular"></div>
+            </div>
             
             <p class="p">Email:</p>
             <input type="text" id="ipt_email">
-            
+            <div class="output_mensagem">
+              <div id="div_mensagem_email"></div>
+            </div>
             
             <p class="txtSenha p">Senha:</p>
-            <p class="txtSenha p">Confirmação senha:</p>
-            
             <input class="boxSenha" type="text" id="ipt_senha">
+            <p class="txtSenha p">Confirmação senha:</p>
             <input class="boxSenha" type="text" id="ipt_senha_confirmacao">
-            
-        
-            
-          </div>
-          <div class="output_mensagem">
-            <div id="div_mensagem_celular"></div>
-            <div id="div_mensagem_email"></div>
-            <div id="div_mensagem_senha"></div>
-            <div id="div_mensagem_senha_confirmacao"></div>
-          </div>
+            <div class="output_mensagem">
+              <div id="div_mensagem_senha"></div>
+              <div id="div_mensagem_senha_confirmacao"></div>
+            </div>
           
-          <button class="buttonCadastro" onclick="cadastrar()">ENVIAR</button>
-            
           
-    
-        </div>
-          <div class="box">
+          <button class="botao" onclick="cadastrar()">CADASTRAR</button>
             
-         
-          </div>
         </div>
-      </div>
+      
     </div>
   </div>
     </div>
     <div class="footer">
       <div class="container">
         <img src="../img/ea logo.png" alt="">
-        <h4>Feito com amor por aluno &hearts; SPTech &copy; 2024</h4>
-        <div class="version">v1.0.0</div>
+        <h4>Fabrício Todos os direitos reservados</h4>
+        
        </div>
     </div>
   </body>
