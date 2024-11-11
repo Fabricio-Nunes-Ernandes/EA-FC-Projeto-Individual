@@ -13,7 +13,7 @@ body {
 
 :root {
     --tamanho-header: 80px;
-    --tamanho-banner: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
+    --tamanho-banner: calc(75vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
     --tamanho-login: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
     --tamanho-footer: 150px;
 }
@@ -34,9 +34,15 @@ body {
     align-items: flex-start;
     width: 80%;
     margin: auto;
-    
 }
 
+.container2{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    margin: auto;
+}
 
 .header .container{
     justify-content: space-between;
@@ -68,40 +74,30 @@ body {
     width: 35%;
     color: black;
     margin-top: 30px;
-    margin-left: 5%;
+    padding-right: 20px;
+    margin-right: 10px;
+    margin-left: 80px;
     margin-bottom: 5%;
     background-image: url('../img/Aitana.png');
     background-size: cover;
     border-radius: 8px;
 }
 
-.imagem .container{
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 80%;
-    margin: auto;
-}
 
 .imagem2{
     height: var(--tamanho-banner);
-    width: 35%;
+    width: 43%;
     color: black;
     margin-top: 30px;
-    margin-left: 5%;
+    margin-left: 20px;
+    margin-right: 20px;
     margin-bottom: 5%;
     background-image: url('../img/messi.png');
     background-size: cover;
     border-radius: 8px;
 }
 
-.imagem2 .container{
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 80%;
-    margin: auto;
-}
+
 
 
 .social{
@@ -112,10 +108,11 @@ body {
     width: 50%;
     padding-bottom: 40px;
     margin-bottom: 20px;
-    
+   
+    margin-right: 20px;
 }
 
-.social .container .boxes{
+.social .container2 .boxes{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -128,8 +125,8 @@ body {
     justify-content: flex-start;
     align-items: flex-start; 
     text-align: start;
-    width: 60%; 
-    padding-left: 25%;
+    width: 50%; 
+    padding-left: 27%;
 }
 
 
@@ -171,7 +168,7 @@ body {
    align-items: center;
    margin-bottom: 10px;
    margin-top: 20px;
-   margin-left: 20%;
+   margin-left: 19%;
   }
 
 
