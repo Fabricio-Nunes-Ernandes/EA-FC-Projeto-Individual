@@ -13,7 +13,7 @@ body {
 
 :root {
     --tamanho-header: 80px;
-    --tamanho-banner: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
+    --tamanho-banner: calc(75vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
     --tamanho-login: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
     --tamanho-footer: 150px;
 }
@@ -34,15 +34,14 @@ body {
     align-items: flex-start;
     width: 80%;
     margin: auto;
-    
 }
-.containerbody{
+
+.container2{
     display: flex;
     justify-content: space-between;
-    flex-direction: row-reverse;
-    width: 80%;
+    align-items: flex-start;
+    width: 100%;
     margin: auto;
-    
 }
 
 .header .container{
@@ -70,25 +69,35 @@ body {
 
 }
 
-.capa{
+.imagem{
     height: var(--tamanho-banner);
     width: 35%;
     color: black;
     margin-top: 30px;
-    margin-left: 5%;
+    padding-right: 20px;
+    margin-right: 10px;
+    margin-left: 80px;
     margin-bottom: 5%;
-    background-image: url('../img/neymar.png');
+    background-image: url('../img/Aitana.png');
     background-size: cover;
     border-radius: 8px;
 }
 
-.capa .containerbody{
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 80%;
-    margin: auto;
+
+.imagem2{
+    height: var(--tamanho-banner);
+    width: 43%;
+    color: black;
+    margin-top: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 5%;
+    background-image: url('../img/messi.png');
+    background-size: cover;
+    border-radius: 8px;
 }
+
+
 
 
 .social{
@@ -99,10 +108,11 @@ body {
     width: 50%;
     padding-bottom: 40px;
     margin-bottom: 20px;
-    
+   
+    margin-right: 20px;
 }
 
-.social .containerbody .boxes{
+.social .container2 .boxes{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -115,8 +125,8 @@ body {
     justify-content: flex-start;
     align-items: flex-start; 
     text-align: start;
-    width: 60%; 
-    padding-left: 25%;
+    width: 50%; 
+    padding-left: 27%;
 }
 
 
@@ -147,7 +157,7 @@ body {
    background-color: #23CE68;
    border: none;
    border-radius: 5px;
-   width: 35%;
+   width: 30%;
    height: 5px;
    padding: 30px;
    font-size: 16px;
@@ -158,7 +168,7 @@ body {
    align-items: center;
    margin-bottom: 10px;
    margin-top: 20px;
-   margin-left: 20%;
+   margin-left: 19%;
   }
 
 
@@ -181,3 +191,124 @@ input {
     font-size: 32px;
 }
 
+.loading-div {
+    width: 50px;
+    display: none;
+  }
+  
+  .loading-div img {
+    height: 50px;
+    width: 50px;
+  }
+  
+  #div_erros_login {
+    display: none
+  }
+  
+  /* FORMULARIO */
+  
+  .alerta_erro{
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .card_erro {
+    display: none;
+    background-color: #fff;
+    color: black;
+    width: 230px;
+    position: fixed;
+    border-radius: 4px;
+    border: #ED145B 3px solid;
+    padding: 10px;
+    margin-right: 10%;
+  }
+  
+  .card_erro #mensagem_erro{
+    font-weight: 500;
+    font-size: 20px;
+  }
+
+  .btn {
+    font-family: "Barlow", sans-serif;
+    border: 0;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 10px 15px;
+    color: white;
+    background-color: #ED145B;
+    width: 120px;
+    align-self: center;
+    margin-top: 5px;
+  }
+  
+  .loading-div {
+    width: 50px;
+    margin: auto;
+    display: none;
+  }
+  
+  .loading-div img {
+    height: 50px;
+    width: 50px;
+  }
+  
+  /* SIMULADOR */
+  
+  .simulador {
+    color: white;
+  }
+  
+  .simulador .container {
+    flex-direction: column;
+    overflow: scroll; 
+    height: var(--tamanho-simulador);
+  }
+  
+  /* ALERTA */
+  
+  #alerta {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+  
+  .mensagem-alarme {
+    background-color: white;
+    border-radius: 5px;
+    width: 300px;
+    height: 80px;
+    margin: 10px;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  
+  .mensagem-alarme h3 {
+    font-size: 14px;
+    margin: 0;
+  }
+  
+  .mensagem-alarme .informacao {
+    width: 66%;
+  }
+  
+  .alarme-sino {
+    width: 48px;
+    height: 48px;
+    animation-name: bell;
+    animation-duration: 4s;
+    background-image: url('https://cdn-icons-png.flaticon.com/512/1157/1157000.png');
+    background-size: cover;
+    animation-iteration-count: infinite;
+  }
+  
+  @keyframes bell {
+    0%   {transform: rotate(25deg)}
+    25%  {transform: rotate(-25deg)}
+    50%  {transform: rotate(25deg)}
+    75%  {transform: rotate(-25deg)}
+    100% {transform: rotate(25deg)}
+  }

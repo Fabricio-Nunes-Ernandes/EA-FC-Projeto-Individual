@@ -13,7 +13,7 @@ body {
 
 :root {
     --tamanho-header: 80px;
-    --tamanho-banner: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
+    --tamanho-banner: calc(70vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
     --tamanho-login: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
     --tamanho-footer: 150px;
 }
@@ -34,15 +34,6 @@ body {
     align-items: flex-start;
     width: 80%;
     margin: auto;
-    
-}
-.containerbody{
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row-reverse;
-    width: 80%;
-    margin: auto;
-    
 }
 
 .header .container{
@@ -70,22 +61,30 @@ body {
 
 }
 
+.titulo {
+    color: #32b9cd;
+
+    font-weight: 500;
+}
+
 .capa{
     height: var(--tamanho-banner);
-    width: 35%;
+    width: 40%;
     color: black;
-    margin-top: 30px;
+    margin-top: 10%;
     margin-left: 5%;
-    margin-bottom: 5%;
-    background-image: url('../img/neymar.png');
+    background-image: url('../img/capa.avif');
     background-size: cover;
     border-radius: 8px;
 }
 
-.capa .containerbody{
+.capa .container{
     justify-content: center;
     align-items: center;
     height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
     width: 80%;
     margin: auto;
 }
@@ -96,29 +95,36 @@ body {
     display: flex;
     border: 6px solid #23CE68;
     border-radius: 8px;
+    justify-content: space-between;
+    align-items: flex-start;
     width: 50%;
-    padding-bottom: 40px;
-    margin-bottom: 20px;
-    
 }
 
-.social .containerbody .boxes{
+.social .container .boxes{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     width: 100%;
-
+    padding: 100px 0;
+    
 }
 
-.boxes {
+.box {
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start; 
-    text-align: start;
+    justify-content: space-between;
+    align-items: center; 
+    text-align: center;
     width: 60%; 
-    padding-left: 25%;
+    padding: 10px;
+    padding-left: 250px;
 }
 
+.box p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
 
 .footer {
     background-color: #ffff;
@@ -142,14 +148,47 @@ body {
     font-size: 12px;
 }
 
+.login  {
+    height: var(--tamanho-login);
+    background-image: url(../assets/imgs/bg-jelly-fish-para_outras_pags.png);
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+} 
+
+.card-login {
+    padding: 30px;
+    text-align: center;
+}
+
+.card {
+    background-color: #e5e5e5;
+    border-radius: 8px;
+    color: hotpink;
+    width: 40%;
+    margin: auto;
+    padding: 10px 70px;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    justify-content: center;
+    align-items: center;
+    border-color: #32b9cd;
+}
+
 .botao{
-   color: black;
-   background-color: #23CE68;
+   color: white;
+   background-color: crimson;
    border: none;
    border-radius: 5px;
-   width: 35%;
-   height: 5px;
-   padding: 30px;
+   width: 23%;
+   height: 30px;
+   padding: 10px;
    font-size: 16px;
    font-weight: 600;
    cursor: pointer;
@@ -157,27 +196,41 @@ body {
    justify-content: center; 
    align-items: center;
    margin-bottom: 10px;
-   margin-top: 20px;
-   margin-left: 20%;
+   margin-top: 10px;
   }
 
+.formulario .campo {
+    margin-bottom: 15px;
+    width: 100%;
+    
+}
 
+.formulario span {
+    font-size: 14px;
+    font-weight: 700;
+}
 
 input {
-    width: 70%;
+    width: 100%;
     padding: 10px;
     padding-top: 2px;
     font-size: 14px;
     font-weight: 500;
-    border: 2px solid #23CE68;
+    border: 2px solid #32b9cd;
     border-radius: 5px;
     box-sizing: border-box;
 }
 
-.titulo {
-    color: #23CE68;
-    display: flex;
-    justify-content: center;
-    font-size: 32px;
+input::placeholder {
+    color: #bbb;
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
 }
 
+.login h2{
+    font-size: 30px;
+    margin-bottom: 1px;
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+}
