@@ -16,3 +16,13 @@ email varchar(60),
 telefone char(11),
 senha varchar(45)
 );
+
+create table tentativa(
+idTentativa int primary key auto_increment,
+titulo varchar(60),
+resposta tinyint,
+pontos int,
+genero varchar(8),
+fkUsuario int,
+constraint fkUsurioTentativa foreign key (fkUsuario) references usuario(idUsuario)
+);

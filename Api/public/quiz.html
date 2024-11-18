@@ -58,9 +58,10 @@
                     questões.</span>
             </div>
        
-          <div id="dificuldadeQuestao" class="padding-8">
-         <span id="spanDificuldade"></span> 
-                </div>
+            <div id="dificuldadeQuestao" class="padding-8">
+              <span id="spanDificuldade"></span> <!-- Aqui a dificuldade será exibida -->
+              <span id="spanGenero"></span> <!-- Aqui o gênero será exibido -->
+          </div>
            
             <div id="perguntaDaQuestaoAtual" class="padding-8">
                 <img id="imagemPergunta" alt="Imagem da pergunta" class="imagem-pergunta" />
@@ -94,15 +95,16 @@
             </div>
     
 
-            <div id="botoes" class="flex-colunar padding-8">
+          
                 <button onclick="submeter()" id="btnSubmeter">Submeter resposta</button>
-            </div> <br> 
-            <div id="botoes" class="flex-colunar padding-8">
+                <br>
+            
                 <button onclick="avancar()" id="btnProx" disabled>Avançar para próxima questão</button>
-                </div> <br> 
-                <div id="botoes" class="flex-colunar padding-8">
+               
+                 <br>
+               
                 <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
-            </div>
+           
 
         </div>
     </div>
@@ -114,21 +116,90 @@
             <h4>Fabrício Todos os direitos reservados</h4>
         </div>
     </div>
-    <!--footer fim-->
+  
 
 </body>
 
 </html>
 <script>
     const listaDeQuestoes = [
+    {
+          pergunta: "Qual a nacionalidade da Aitana Bonmatí?",
+          alternativaA: "França",
+          alternativaB: "Alemanha",
+          alternativaC: "Belgica",
+          alternativaD: "Espanha",
+          alternativaCorreta: "alternativaD",
+          dificuldade: "facil",  
+          genero: "feminino",
+          imagemPergunta: "../public/img/aitana_per.webp",
+          imagensAlternativas: [
+              "../public/img/franca.png",
+              "../public/img/alemanha.png",
+              "../public/img/belgica.png",
+              "../public/img/espanha.png"
+          ]
+      },
       {
-          pergunta: "Qual a nacionalidade da Hansen?",
+          pergunta: "Qual a nacionalidade do Rodri?",
+          alternativaA: "Inglaterra",
+          alternativaB: "Espanha",
+          alternativaC: "Alemanha",
+          alternativaD: "Suecia",
+          alternativaCorreta: "alternativaB",
+          dificuldade: "facil",  
+          genero: "masculino",
+          imagemPergunta: "../public/img/rodri.webp",
+          imagensAlternativas: [
+              "../public/img/inglaterra.png",
+              "../public/img/espanha.png",
+              "../public/img/alemanha.png",
+              "../public/img/suecia.png"
+          ]
+      },
+      {
+          pergunta: "Qual a nacionalidade da Sam Keer?",
+          alternativaA: "Australia",
+          alternativaB: "Alemanha",
+          alternativaC: "Noruega",
+          alternativaD: "inglaterra",
+          alternativaCorreta: "alternativaA",
+          dificuldade: "media",  
+          genero: "feminino",
+          imagemPergunta: "../public/img/kerr.webp",
+          imagensAlternativas: [
+              "../public/img/australia.png",
+              "../public/img/alemanha.png",
+              "../public/img/noruega.png",
+              "../public/img/inglaterra.png"
+          ]
+      },
+      {
+          pergunta: "Qual a nacionalidade do Jorginho?",
+          alternativaA: "Argentina",
+          alternativaB: "Brasil",
+          alternativaC: "Portugal",
+          alternativaD: "Italia",
+          alternativaCorreta: "alternativaD",
+          dificuldade: "media",  
+          genero: "masculino",
+          imagemPergunta: "../public/img/jorginho.webp",
+          imagensAlternativas: [
+              "../public/img/argentina.png",
+              "../public/img/brasil.png",
+              "../public/img/portugal.png",
+              "../public/img/italia.png"
+          ]
+      },
+      {
+          pergunta: "Qual a nacionalidade da Caroline Graham Hansen?",
           alternativaA: "Suiça",
           alternativaB: "Suécia",
           alternativaC: "Noruega",
           alternativaD: "Espanha",
           alternativaCorreta: "alternativaC",
           dificuldade: "dificil",  
+          genero: "feminino",
           imagemPergunta: "../public/img/HANSEN.webp",
           imagensAlternativas: [
               "../public/img/suica.png",
@@ -138,22 +209,23 @@
           ]
       },
       {
-          pergunta: "Quantas horas tem em um dia?",
-          alternativaA: "30 horas",
-          alternativaB: "38 horas",
-          alternativaC: "48 horas",
-          alternativaD: "24 horas",
-          alternativaCorreta: "alternativaD",
-          dificuldade: "media",  
-          imagemPergunta: "img-pergunta2.png",
+          pergunta: "Qual a nacionalidade do Alexis Mac Allister?",
+          alternativaA: "Inglaterra",
+          alternativaB: "Argentina",
+          alternativaC: "Alemanha",
+          alternativaD: "Belgica",
+          alternativaCorreta: "alternativaB",
+          dificuldade: "dificil",  
+          genero: "feminino",
+          imagemPergunta: "../public/img/mac.webp",
           imagensAlternativas: [
-              "img-alternativaA2.png",
-              "img-alternativaB2.png",
-              "img-alternativaC2.png",
-              "img-alternativaD2.png"
+              "../public/img/inglaterra.png",
+              "../public/img/Argentina.png",
+              "../public/img/alemanha.png",
+              "../public/img/belgica.png"
           ]
       }
-      // Adicione outras questões conforme necessário...
+   
   ];
   
     // variáveis globais    
@@ -215,7 +287,20 @@
         dificuldadeElemento.innerHTML = "Dificuldade: Difícil";
         dificuldadeElemento.style.color = "red"; 
     }
+
+    const generoElemento = document.getElementById("spanGenero");
+    if (questaoAtual.genero === "masculino") {
+        generoElemento.innerHTML = " | Gênero: Masculino";
+        generoElemento.style.color = "blue"; // cor para masculino
+    } else if (questaoAtual.genero === "feminino") {
+        generoElemento.innerHTML = " | Gênero: Feminino";
+        generoElemento.style.color = "purple"; // cor para feminino
+    } else {
+        generoElemento.innerHTML = " | Gênero: Indefinido";
+        generoElemento.style.color = "gray"; // cor para indefinido
+    }
 }
+
 
     function submeter() {
       const options = document.getElementsByName("option"); // recupera alternativas no html
@@ -334,8 +419,9 @@
     function finalizarJogo() {
       let textoParaMensagemFinal = null
       let classComCoresParaMensagemFinal = null
+      var pontos_possiveis = 
   
-      textoParaMensagemFinal = "Você fez " + pontuacaoFinal + " pontos."
+      textoParaMensagemFinal = "Você fez " + pontuacaoFinal + " pontos" + " de: " + pontos_possiveis + " possiveis";
   
       document.getElementById('msgFinal').innerHTML = textoParaMensagemFinal
       document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal) 

@@ -126,6 +126,7 @@ button {
     border: 3px solid var(--secondary-brand-color);
     background-color: #e5e5e5;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 #infoQuestao, #perguntaDaQuestaoAtual, #infoAlternativas {
@@ -195,47 +196,57 @@ input[type="radio"] {
     padding-left: 8px;
 }
 
-#botoes {
+
+#btnSubmeter {
     display: flex;
     flex-direction: column;
     gap: 12px;
     align-items: center;
-    background-color: #23CE68;
+    background-color: var(--primary-brand-color);
     border: 3px solid #000; 
-    border-radius: 8px;
-    max-width: 160px;
-    
-}
-#botoes:hover {
-    background-color: var(--secondary-brand-color);
-}
-
-#btnSubmeter, #btnProx, #btnTentarNovamente {
     width: 100%;
     max-width: 160px;
     font-size: 16px;
-    padding: 12px;
+    border-radius: 8px;
+  
+}
+#btnProx {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    background-color: var(--primary-brand-color);
+    border: 3px solid #000; 
+    width: 100%;
+    max-width: 160px;
+    font-size: 16px;
     border-radius: 8px;
 }
 
-#btnProx:disabled, #btnTentarNovamente:disabled {
-    background-color: var(--new-gray);
+#btnTentarNovamente {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    background-color: var(--primary-brand-color);
+    border: 3px solid #000; 
+    width: 100%;
+    max-width: 160px;
+    font-size: 16px;
+    border-radius: 8px;
 }
 
-#btnSubmeter:hover {
+
+
+#btnSubmeter:hover, #btnProx:hover, #btnTentarNovamente:hover {
     background-color: var(--secondary-brand-color); 
     cursor: pointer;
 }
 
-#btnProx {
-    background-color: var(--secondary-brand-color);
-    color: white;
-}
+/* #btnProx:disabled, #btnTentarNovamente:disabled {
+    background-color: var(secondary-brand-color-brand-color);
+} */
 
-#btnTentarNovamente {
-    background-color: var(--warning);
-    color: white;
-}
 
 
 /* Adicionar aqui toda a estilização criada para sua aplicação. */
