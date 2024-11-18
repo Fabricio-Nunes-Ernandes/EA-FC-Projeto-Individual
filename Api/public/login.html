@@ -10,24 +10,23 @@
 
     <script src="./js/sessao.js"></script>
 
-    <link rel="stylesheet" href="/css/login.css">
-    <link rel="icon" href=".img/ea logo.png">
+    <link rel="stylesheet" href="../public/css/login.css">
+    <link rel="icon" href="./img/ea logo.png">
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
 <body>
 
     <!--Header-->
-
     <div class="header">
         <div class="container">
-            <img src=".img/ea logo.png" alt="">
+            <img src="./img/ea logo.png" alt="">
             <ul class="navbar">
                 <li>
                     <a href="index.html">Inicial</a>
                 </li>
                 <li>
-                    <a href="simulador.html">Simulador</a>
+                    <a href="quiz.html">Quiz</a>
                 </li>
                 <li>|</li>
                 <li class="agora">
@@ -40,34 +39,31 @@
         </div>
     </div>
 
-
     <div class="login">
         <div class="alerta_erro">
             <div class="card_erro" id="cardErro">
                 <span id="mensagem_erro"></span>
             </div>
         </div>
-        </div>
-
-        <p class="titulo">Login</p>
-      <div class="container2">
-       
-        <div class="imagem">
-      
     </div>
-    
-    <div class="social">
-        <div class="container2">
-          <div class="boxes">
-          
-            <p class="p">E-mail:</p>
-            <input id="email_input" type="text">
+
+    <p class="titulo">Login</p>
+
+    <!-- Container para alinhar imagens e conteúdo -->
+    <div class="container2">
+        <div class="imagem">
             
-            <p class="p">Senha:</p>
-            <input id="senha_input" type="password" placeholder="******">
-            <button class="botao" onclick="entrar()">Entrar</button>
-            
-            
+        </div>
+     
+        <div class="social">
+            <div class="boxes">
+                <p class="p">E-mail:</p>
+                <input id="email_input" type="text">
+
+                <p class="p">Senha:</p>
+                <input id="senha_input" type="password" placeholder="******">
+                <button class="botao" onclick="entrar()">Entrar</button>
+
                 <div id="div_aguardar" class="loading-div">
                     <img src="./assets/circle-loading.gif" id="loading-gif">
                 </div>
@@ -75,19 +71,11 @@
                 <div id="div_erros_login"></div>
             </div>
         </div>
+
+        <div class="imagem2">
+           
+        </div>
     </div>
-    </div>
-
-</div>
-
-<div class="container2">
-       
-    <div class="imagem2">
-  
-</div>
-</div>
-
-
 
     <!--footer inicio-->
     <div class="footer">
@@ -101,6 +89,7 @@
 </body>
 
 </html>
+
 
 <script>
 

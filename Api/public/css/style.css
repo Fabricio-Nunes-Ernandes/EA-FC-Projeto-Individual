@@ -1,0 +1,437 @@
+/* Não usar pure white or pure black: https://uxplanet.org/basicdesign-never-use-pure-black-in-typography-36138a3327a6 */
+/* The 4-point grid system: https://medium.com/@sainzkike/controlling-spacing-in-design-systems-multiple-spacing-9bf1afec87f */
+:root {
+    --primary-brand-color: #23CE68; 
+    --secondary-brand-color: #198754; 
+    --success: #198754; 
+    --success-dark: #095c36;
+    --success-light: #9dd3ba;
+    --warning: #ffc107;
+    --warning-dark: #705400;
+    --warning-light: #fdebb3;
+    --neutral-light: #e5e5e5; 
+    --neutral-dark: #2E2E2E; 
+    --background-white: #F9F9F9; 
+    --text-black: #212427; 
+}
+body {
+    color: var(--new-black);
+    background-color: var(--new-white);
+    font-family: 'Barlow', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    font-family: 'Barlow', sans-serif;
+    font-weight: bold;
+    border: none;
+    background-color: var(--primary-brand-color);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+.flex-colunar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.width-fit-content {
+    width: fit-content;
+}
+
+.border-primary {
+    border: 3px solid var(--primary-brand-color);
+}
+
+.border-secondary {
+    border: 3px solid var(--secondary-brand-color);
+}
+
+.padding-8 {
+    padding: 8px;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.text-success-with-bg {
+    color: var(--success-dark);
+    background-color: var(--success-light);
+}
+
+.text-warning-with-bg {
+    color: var(--warning-dark);
+    background-color: var(--warning-light);
+}
+
+.text-danger-with-bg {
+    color: var(--danger-dark);
+    background-color: var(--danger-light);
+}
+
+.text-new-gray {
+    color: var(--new-gray);
+}
+
+#pontuacaoEJogo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    width: 80%;
+}
+
+#btnIniciarQuiz {
+    padding: 12px 20px;
+    font-size: 18px;
+    border-radius: 8px;
+    background-color: var(--primary-brand-color);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 170px;
+    margin-bottom: 200px;
+}
+
+#btnIniciarQuiz:hover {
+    background-color: var(--secondary-brand-color);
+}
+
+#pontuacao {
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+    background-color: #e5e5e5;
+}
+
+#pontuacaoDuranteJogo, #pontuacaoFinalJogo {
+    margin-bottom: 16px;
+    background-color: #e5e5e5;
+}
+
+#jogo {
+    width: 80%;
+    max-width: 600px;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    border: 3px solid var(--secondary-brand-color);
+    background-color: #e5e5e5;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#infoQuestao, #perguntaDaQuestaoAtual, #infoAlternativas {
+    margin-bottom: 16px;
+}
+
+#infoAlternativas em {
+    color: var(--new-gray);
+    font-style: italic;
+}
+
+
+#perguntaDaQuestaoAtual {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center;
+}
+
+.imagem-pergunta {
+    display: block;
+    width: 100%; 
+    width: 400px; 
+    height: auto; 
+    margin-bottom: 16px; 
+    border-radius: 8px; 
+}
+
+
+
+#opcoes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    justify-items: center;
+}
+
+.opcao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+}
+
+
+.imagem-alternativa {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--neutral-dark);
+}
+
+
+.radio {
+    margin: 5px;
+}
+
+
+input[type="radio"] {
+    margin-right: 12px;
+}
+
+.labelOpcao {
+    font-size: 16px;
+    padding-left: 8px;
+}
+
+#botoes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    background-color: #23CE68;
+    border: 3px solid #000; 
+    border-radius: 8px;
+    max-width: 160px;
+    
+}
+#botoes:hover {
+    background-color: var(--secondary-brand-color);
+}
+
+#btnSubmeter, #btnProx, #btnTentarNovamente {
+    width: 100%;
+    max-width: 160px;
+    font-size: 16px;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+#btnProx:disabled, #btnTentarNovamente:disabled {
+    background-color: var(--new-gray);
+}
+
+#btnSubmeter:hover {
+    background-color: var(--secondary-brand-color); 
+    cursor: pointer;
+}
+
+#btnProx {
+    background-color: var(--secondary-brand-color);
+    color: white;
+}
+
+#btnTentarNovamente {
+    background-color: var(--warning);
+    color: white;
+}
+
+
+/* Adicionar aqui toda a estilização criada para sua aplicação. */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+body {
+     margin: 0;
+     padding: 0;
+     font-family: 'Barlow', sans-serif;
+     background-color: #2E2E2E;
+
+}
+
+:root {
+    --tamanho-header: 80px;
+    --tamanho-banner: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
+    --tamanho-login: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
+    --tamanho-footer: 150px;
+}
+
+.header{
+   height: var(--tamanho-header);
+   border-bottom: 6px solid #23CE68;
+   background-color: #ffff;
+
+}
+.header img{
+    height: 50px;
+ }
+
+.container{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 80%;
+    margin: auto;
+    
+}
+.containerbody{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    width: 80%;
+    margin: auto;
+    
+}
+
+.header .container{
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.header a{
+    text-decoration: none;
+    color: black;
+}
+
+.agora{
+    font-weight: 800;
+    
+}
+
+.navbar{
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    
+
+}
+
+.capa{
+    height: var(--tamanho-banner);
+    width: 35%;
+    color: black;
+    margin-top: 30px;
+    margin-left: 5%;
+    margin-bottom: 5%;
+    background-image: url('../img/neymar.png');
+    background-size: cover;
+    border-radius: 8px;
+}
+
+.capa .containerbody{
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 80%;
+    margin: auto;
+}
+
+
+.social{
+    background-color: #e5e5e5;
+    display: flex;
+    border: 6px solid #23CE68;
+    border-radius: 8px;
+    width: 50%;
+    padding-bottom: 30px;
+    margin-bottom: 20px;
+    
+}
+
+.social .containerbody .boxes{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+
+}
+
+.boxes {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start; 
+    text-align: start;
+    width: 60%; 
+    padding-left: 25%;
+}
+
+
+.footer {
+    background-color: #ffff;
+    height: var(--tamanho-footer);
+    color: #000;
+    display: flex;
+    justify-content: space-between; 
+    padding: 20px;
+    font-size: 15px;
+    border-top: 6px solid #23CE68;
+}
+
+.footer .container{
+    justify-content: center;
+    
+}
+.footer img{
+    height: 50px;
+ }
+.version {
+    font-size: 12px;
+}
+
+.botao{
+   color: black;
+   background-color: #23CE68;
+   border: none;
+   border-radius: 5px;
+   width: 35%;
+   height: 5px;
+   padding: 30px;
+   font-size: 16px;
+   font-weight: 600;
+   cursor: pointer;
+   display: flex; 
+   justify-content: center; 
+   align-items: center;
+   margin-bottom: 10px;
+   margin-top: 20px;
+   margin-left: 20%;
+  }
+
+
+
+input {
+    width: 70%;
+    padding: 10px;
+    padding-top: 2px;
+    font-size: 14px;
+    font-weight: 500;
+    border: 2px solid #23CE68;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.titulo {
+    color: #23CE68;
+    display: flex;
+    justify-content: center;
+    font-size: 32px;
+}
+
+.loading-div {
+    width: 50px;
+    display: none;
+  }
+  
+  .loading-div img {
+    height: 50px;
+    width: 50px;
+  }
+  
+  
+
+  

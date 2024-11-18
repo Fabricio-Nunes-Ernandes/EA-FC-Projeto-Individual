@@ -36,13 +36,13 @@ body {
     margin: auto;
 }
 
-.container2{
+/* .container2{
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
     margin: auto;
-}
+} */
 
 .header .container{
     justify-content: space-between;
@@ -75,8 +75,7 @@ body {
     color: black;
     margin-top: 30px;
     padding-right: 20px;
-    margin-right: 10px;
-    margin-left: 80px;
+    margin-left: 100px;
     margin-bottom: 5%;
     background-image: url('../img/Aitana.png');
     background-size: cover;
@@ -100,7 +99,7 @@ body {
 
 
 
-.social{
+/* .social{
     background-color: #e5e5e5;
     display: flex;
     border: 6px solid #23CE68;
@@ -110,7 +109,7 @@ body {
     margin-bottom: 20px;
    
     margin-right: 20px;
-}
+} */
 
 .social .container2 .boxes{
     display: flex;
@@ -120,14 +119,14 @@ body {
 
 }
 
-.boxes {
+/* .boxes {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start; 
     text-align: start;
-    width: 50%; 
-    padding-left: 27%;
-}
+    width: 60%; 
+    padding-left: 25%;
+} */
 
 
 .footer {
@@ -152,7 +151,7 @@ body {
     font-size: 12px;
 }
 
-.botao{
+/* .botao{
    color: black;
    background-color: #23CE68;
    border: none;
@@ -169,9 +168,58 @@ body {
    margin-bottom: 10px;
    margin-top: 20px;
    margin-left: 19%;
-  }
+  } */
+
+  .container2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    margin: auto;
+    padding: 20px; /* Adiciona espaço interno */
+    box-sizing: border-box; /* Inclui padding no cálculo da largura */
+}
+
+.social {
+    background-color: #e5e5e5;
+    display: flex;
+    flex-direction: column; /* Alinha conteúdo verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    border: 6px solid #23CE68;
+    border-radius: 8px;
+    width: 40%; /* Ajusta largura */
+    padding: 20px; /* Adiciona espaço interno */
+    box-sizing: border-box;
+}
+
+.boxes {
+    display: flex;
+    flex-direction: column; /* Organiza os itens na vertical */
+    align-items: flex-start; /* Alinha os itens à esquerda */
+    justify-content: flex-start; /* Coloca o conteúdo no topo */
+    width: 100%; /* Usa toda a largura disponível */
+    text-align: left; /* Garante que o texto seja alinhado à esquerda */
+    padding: 10px; /* Adiciona espaço interno para o texto */
+    margin-left: 120px;
+    box-sizing: border-box; /* Inclui o padding no cálculo da largura */
+}
 
 
+
+.botao {
+    color: black;
+    background-color: #23CE68;
+    border: none;
+    border-radius: 5px;
+    width: 40%; /* Ajusta largura para ficar proporcional */
+    padding: 10px; /* Adiciona padding consistente */
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 60px;
+}
 
 input {
     width: 70%;
