@@ -26,3 +26,11 @@ genero varchar(8),
 fkUsuario int,
 constraint fkUsurioTentativa foreign key (fkUsuario) references usuario(idUsuario)
 );
+
+create table ranking(
+idRanking int primary key auto_increment,
+pontos_total int,
+posicao int,
+fkTentativa int,
+constraint fkRankTentativa foreign key (fkTentativa) references tentativa (idTentativa)
+);
