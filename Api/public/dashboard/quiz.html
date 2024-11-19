@@ -5,36 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz</title>
-    <link rel="stylesheet" href="../public/css/style.css">
-    <script src="./js/quiz.js"></script>
+    <link rel="stylesheet" href="./../css/quiz.css"/>
+    <script src="../js/quiz.js"></script>
+    <script src="../js/sessao.js"></script>
 </head>
 
-<body onload="onloadEsconder()">
-    <!--header inicio-->
+<body onload="onloadEsconder(), validarSessao()">
+
     <div class="header">
         <div class="container">
-            <img src="../public/img/ea logo.png" alt="">
+            <img src="./img/ea logo.png" alt="">
             <ul class="navbar">
                 <li>
-                    <a href="index.html">Inicial</a>
+                    <a href="./index.html">Inicial</a>
                 </li>
                 <li>
                     <li class="agora">
-                    <a href="quiz.html">Quiz</a>
+                    <a href="./../quiz.html">Quiz</a>
                     </li>
                 </li>
                 <li>|</li>
                 <li>
-                    <a href="login.html">Login</a>
+                    <a href="./../login.html">Login</a>
                 </li>
-                    <a href="cadastro.html">Cadastro</a>
+                    <a href="./../cadastro.html">Cadastro</a>
             </ul>
         </div>
     </div>
-    <!--header fim-->
+   
 
     <div id="pontuacaoEJogo">
-        
+        <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
         <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
 
         <div id="pontuacao" class="flex-colunar width-fit-content border-primary">
@@ -43,9 +44,9 @@
                 <span class="width-fit-content">Quantidade de erros: <span id="spanErradas"></span></span>
             </div>
             <div id="pontuacaoFinalJogo" class="flex-colunar padding-8">
-                <span id="pontuacaoFinal" class="width-fit-content">Pontuação Final:
+                <!-- <span id="pontuacaoFinal" class="width-fit-content">Pontuação Final:
                     <span id="spanPontuacaoFinal">***</span>
-                </span>
+                </span> -->
                 <span id="msgFinal" class="width-fit-content">***</span>
             </div>
         </div>
@@ -59,8 +60,8 @@
             </div>
        
             <div id="dificuldadeQuestao" class="padding-8">
-              <span id="spanDificuldade"></span> <!-- Aqui a dificuldade será exibida -->
-              <span id="spanGenero"></span> <!-- Aqui o gênero será exibido -->
+              <span id="spanDificuldade"></span> 
+              <span id="spanGenero"></span> 
           </div>
            
             <div id="perguntaDaQuestaoAtual" class="padding-8">
@@ -109,7 +110,7 @@
         </div>
     </div>
 
-    <!--footer inicio-->
+
     <div class="footer">
         <div class="container">
             <img src="../public/img/ea logo.png" alt="">
@@ -216,7 +217,7 @@
           alternativaD: "Belgica",
           alternativaCorreta: "alternativaB",
           dificuldade: "dificil",  
-          genero: "feminino",
+          genero: "masculino",
           imagemPergunta: "../public/img/mac.webp",
           imagensAlternativas: [
               "../public/img/inglaterra.png",
@@ -228,7 +229,7 @@
    
   ];
   
-    // variáveis globais    
+   
     let numeroDaQuestaoAtual = 0
     let pontuacaoFinal = 0
     let tentativaIncorreta = 0
@@ -291,14 +292,11 @@
     const generoElemento = document.getElementById("spanGenero");
     if (questaoAtual.genero === "masculino") {
         generoElemento.innerHTML = " | Gênero: Masculino";
-        generoElemento.style.color = "blue"; // cor para masculino
+        generoElemento.style.color = "blue"; 
     } else if (questaoAtual.genero === "feminino") {
         generoElemento.innerHTML = " | Gênero: Feminino";
-        generoElemento.style.color = "purple"; // cor para feminino
-    } else {
-        generoElemento.innerHTML = " | Gênero: Indefinido";
-        generoElemento.style.color = "gray"; // cor para indefinido
-    }
+        generoElemento.style.color = "purple"; 
+    } 
 }
 
 
@@ -419,7 +417,7 @@
     function finalizarJogo() {
       let textoParaMensagemFinal = null
       let classComCoresParaMensagemFinal = null
-      var pontos_possiveis = 
+      var pontos_possiveis = 32
   
       textoParaMensagemFinal = "Você fez " + pontuacaoFinal + " pontos" + " de: " + pontos_possiveis + " possiveis";
   
@@ -433,5 +431,54 @@
       btnSubmeter.disabled = true
       btnTentarNovamente.disabled = false
     }
+
+    function registrarTentativaQuiz() {
+
+  var tituloVar = document.getElementById("tituloQuiz").value;
+  var respostaVar = document.getElementById("respostaQuiz").value;
+  var pontosVar = parseInt(document.getElementById("pontosQuiz").value);
+  var generoVar = document.getElementById("generoQuiz").value;
+  var fkUsuarioVar = parseInt(sessionStorage.getItem("ID_USUARIO")); 
+
+  if (
+    tituloVar === "" ||
+    respostaVar === "" ||
+    isNaN(pontosVar) ||
+    generoVar === "" ||
+    isNaN(fkUsuarioVar)
+  ) {
+    alert("Por favor, preencha todos os campos antes de enviar.");
+    return false;
+  }
+
+  
+  fetch("/quiz/registrarTentativa", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      tituloServer: tituloVar,
+      respostaServer: respostaVar,
+      pontosServer: pontosVar,
+      generoServer: generoVar,
+      fkUsuarioServer: fkUsuarioVar,
+    }),
+  })
+    .then(function (resposta) {
+      if (resposta.ok) {
+        alert("Tentativa registrada com sucesso!");
+      } else {
+        resposta.text().then((msg) => alert("Erro: " + msg));
+      }
+    })
+    .catch(function (erro) {
+      console.error("Erro ao registrar tentativa: ", erro);
+      alert("Erro ao registrar tentativa. Tente novamente mais tarde.");
+    });
+
+  return false;
+}
+
   </script>
   
