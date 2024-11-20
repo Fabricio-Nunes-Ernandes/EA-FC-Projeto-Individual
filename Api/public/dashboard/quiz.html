@@ -362,12 +362,12 @@
   }
 
   function checarResposta() {
-    const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual] // questão atual 
-    const respostaQuestaoAtual = questaoAtual.alternativaCorreta // qual é a resposta correta da questão atual
+    const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual] 
+    const respostaQuestaoAtual = questaoAtual.alternativaCorreta 
 
-    const options = document.getElementsByName("option"); // recupera alternativas no html
+    const options = document.getElementsByName("option"); 
 
-    let alternativaCorreta = null // variável para armazenar a alternativa correta
+    let alternativaCorreta = null 
 
     options.forEach((option) => {
       if (option.value === respostaQuestaoAtual) {
@@ -376,7 +376,7 @@
       }
     })
 
-    // Verifica se resposta assinalada é correta e adiciona pontuação com base na dificuldade
+    
     options.forEach((option) => {
       let pontos = 0;
       if (questaoAtual.dificuldade === "facil") {
@@ -439,16 +439,22 @@
     btnTentarNovamente.disabled = false
   }
 
-  function registrarTentativaQuiz() {
-    // Dados da questão atual
+  
+
+if (!sessionStorage.getItem("tentativaAtual")) {
+    sessionStorage.setItem("tentativaAtual", 1); 
+}
+
+let tentativaAtual = parseInt(sessionStorage.getItem("tentativaAtual"));
+
+function registrarTentativaQuiz() {
     const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual - 1];
-    var tituloVar = document.getElementById("spanQuestaoExibida").innerHTML;
+    const tituloVar = document.getElementById("spanQuestaoExibida").innerHTML;
     const generoVar = questaoAtual.genero;
 
-    // Resposta selecionada
+    
     const options = document.getElementsByName("option");
     let respostaVar = null;
-    let pontosVar = 0;  // Inicializa a pontuação como 0
 
     options.forEach((option) => {
         if (option.checked) {
@@ -456,25 +462,15 @@
         }
     });
 
-    // Verifica se a resposta foi selecionada
-    if (!respostaVar) {
-        alert("Por favor, selecione uma resposta antes de submeter.");
-        return false;
-    }
+    
+    // if (!respostaVar) {
+    //     alert("Por favor, selecione uma resposta antes de submeter.");
+    //     return false;
+    // }
 
-    // Depuração: Exibe a resposta do usuário e a resposta correta
-    console.log("Resposta do usuário:", respostaVar);
-    console.log("Resposta correta:", questaoAtual.alternativaCorreta);
-
-    // Verifica se a resposta correta foi atribuída na questão
-    if (!questaoAtual.alternativaCorreta) {
-        alert("Erro: a resposta correta não está definida.");
-        return false;
-    }
-
-    // Verifica se a resposta do usuário corresponde à alternativa correta (nome da chave)
-    if (respostaVar === questaoAtual.alternativaCorreta) {
-        // Se a resposta for correta, atribui pontos com base na dificuldade
+    
+    let pontosVar = 0;
+    if (respostaVar.toLowerCase() === questaoAtual.alternativaCorreta.toLowerCase()) {
         if (questaoAtual.dificuldade === "facil") {
             pontosVar = 1;
         } else if (questaoAtual.dificuldade === "media") {
@@ -484,16 +480,10 @@
         }
     }
 
-    // ID do usuário (exemplo retirado do sessionStorage)
+   
     const fkUsuarioVar = parseInt(sessionStorage.getItem("ID_USUARIO"));
     if (isNaN(fkUsuarioVar)) {
         alert("Erro: usuário não identificado.");
-        return false;
-    }
-
-    // Validação final
-    if (!tituloVar || !respostaVar || !generoVar) {
-        alert("Erro: alguns dados estão ausentes.");
         return false;
     }
 
@@ -505,22 +495,30 @@
         },
         body: JSON.stringify({
             tituloServer: tituloVar,
-            respostaServer: `"${respostaVar}"`,  // Envia o nome da alternativa (chave) como resposta
-            pontosServer: pontosVar,  // Envia os pontos apenas se a resposta estiver correta
+            respostaServer:  `"${respostaVar}"`,
+            pontosServer: pontosVar,
             generoServer: generoVar,
             fkUsuarioServer: fkUsuarioVar,
+            TentativaServer: sessionStorage.getItem("tentativaAtual"),
         }),
     })
     .then((resposta) => {
         if (resposta.ok) {
-           
+            console.log("Questão registrada com sucesso!");
+
+          
+            if (numeroDaQuestaoAtual >= listaDeQuestoes.length) {
+                tentativaAtual++;
+                
+                sessionStorage.setItem("tentativaAtual", tentativaAtual); 
+            }
         } else {
             resposta.text().then((msg) => alert("Erro: " + msg));
         }
     })
     .catch((erro) => {
-        console.error("Erro ao registrar tentativa: ", erro);
-        alert("Erro ao registrar tentativa. Tente novamente mais tarde.");
+        console.error("Erro ao registrar questão: ", erro);
+        alert("Erro ao registrar questão. Tente novamente mais tarde.");
     });
 
     return false;

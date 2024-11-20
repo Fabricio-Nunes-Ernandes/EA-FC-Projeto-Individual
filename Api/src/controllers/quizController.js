@@ -8,6 +8,7 @@ function registrarTentativa(req, res) {
     var pontos = req.body.pontosServer;
     var genero = req.body.generoServer;
     var fkUsuario = req.body.fkUsuarioServer;
+    var tentativaAtual = req.body.TentativaServer;
 
    
     if (titulo == undefined) {
@@ -20,10 +21,13 @@ function registrarTentativa(req, res) {
         res.status(400).send("O gênero está undefined!");
     } else if (fkUsuario == undefined) {
         res.status(400).send("O ID do usuário (fkUsuario) está undefined!");
+    }
+      else if (tentativaAtual == undefined) {
+      res.status(400).send("O ID da tentativa (tentativa_Atual) está undefined!");
     } else {
       
         quizModel
-            .registrarTentativa(titulo, resposta, pontos, genero, fkUsuario)
+            .registrarTentativa(titulo, resposta, pontos, genero, fkUsuario, tentativaAtual)
             .then(function (resultado) {
                 res.json(resultado);
             })

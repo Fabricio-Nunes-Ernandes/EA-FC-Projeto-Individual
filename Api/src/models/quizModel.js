@@ -2,19 +2,20 @@
 
 var database = require("../database/config");
 
-function registrarTentativa(titulo, resposta, pontos, genero, fkUsuario) {
+function registrarTentativa(titulo, resposta, pontos, genero, fkUsuario, tentativaAtual) {
     console.log(
         "ACESSEI O QUIZ MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function registrarTentativa():",
         titulo,
         resposta,
         pontos,
         genero,
-        fkUsuario
+        fkUsuario,
+        tentativaAtual
     );
 
     var instrucaoSql = `
-        INSERT INTO tentativa (titulo, resposta, pontos, genero, fkUsuario) 
-        VALUES ('${titulo}', ${resposta}, ${pontos}, '${genero}', ${fkUsuario});
+        INSERT INTO tentativa (titulo, resposta, pontos, genero, fkUsuario, tentativaAtual) 
+        VALUES ('${titulo}', ${resposta}, ${pontos}, '${genero}', ${fkUsuario} , ${tentativaAtual});
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
