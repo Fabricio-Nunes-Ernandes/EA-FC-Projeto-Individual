@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiz</title>
   <link rel="stylesheet" href="./../css/quiz.css" />
-  <link rel="icon" href="./../../img/ea logo.png" />
+  <link rel="icon" href="./../img/ea logo.png" />
   <script src="./../js/sessao.js"></script>
   
 </head>
@@ -15,7 +15,7 @@
 
   <div class="header">
     <div class="container">
-      <img src="./img/ea logo.png" alt="">
+      <img src="./../img/ea logo.png" alt="">
       <ul class="navbar">
         <li>
           <a href="./index.html">Inicial</a>
@@ -441,7 +441,7 @@
 
   
 
-if (!sessionStorage.getItem("tentativaAtual")) {
+if (!sessionStorage.getItem("tentativaAtual")){
     sessionStorage.setItem("tentativaAtual", 1); 
 }
 
@@ -462,11 +462,7 @@ function registrarTentativaQuiz() {
         }
     });
 
-    
-    // if (!respostaVar) {
-    //     alert("Por favor, selecione uma resposta antes de submeter.");
-    //     return false;
-    // }
+  
 
     
     let pontosVar = 0;
@@ -485,7 +481,7 @@ function registrarTentativaQuiz() {
     if (isNaN(fkUsuarioVar)) {
         alert("Erro: usuário não identificado.");
         return false;
-    }
+    } 
 
     // Envio dos dados via fetch
     fetch("/quiz/registrarTentativa", {
