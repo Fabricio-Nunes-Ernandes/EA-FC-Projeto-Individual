@@ -21,6 +21,20 @@ function registrarTentativa(titulo, resposta, pontos, genero, fkUsuario, tentati
     return database.executar(instrucaoSql);
 }
 
+function obterUltimaTentativa(fkUsuario) {
+    var instrucaoSql = `
+        SELECT MAX(tentativaAtual) AS ultimaTentativa
+        FROM tentativa
+        WHERE fkUsuario = ${fkUsuario};
+    `;
+    console.log("Executando SQL para obter a última tentativa: \n" + instrucaoSql);
+
+    return database.executar(instrucaoSql); // Retorna o resultado da consulta SQL
+}
+
+
+
 module.exports = {
-    registrarTentativa
+    registrarTentativa,
+    obterUltimaTentativa, 
 };

@@ -245,7 +245,7 @@
 
   function iniciarQuiz() {
     
-
+    obterUltimaTentativaDoBackend();
     document.getElementById('pontuacao').style.display = "flex"
     document.getElementById('jogo').style.display = "flex"
     document.getElementById('btnIniciarQuiz').style.display = "none"
@@ -441,13 +441,25 @@
 
   
 
-if (!sessionStorage.getItem("tentativaAtual")){
-    sessionStorage.setItem("tentativaAtual", 1); 
+  function obterUltimaTentativaDoBackend() {
+    const fkUsuarioVar = parseInt(sessionStorage.getItem("ID_USUARIO"));
+    if (isNaN(fkUsuarioVar)) {
+        alert("Erro: usuário não identificado.");
+        return;
+    }
+
+    fetch(`/quiz/obterUltimaTentativa/${fkUsuarioVar}`)
+    .then((resposta) => resposta.json())
+    .then((data) => {
+        const tentativaAtual = data.ultimaTentativa || 1;
+        sessionStorage.setItem("tentativaAtual", tentativaAtual);
+        console.log(`Tentativa atual setada como: ${tentativaAtual}`);
+    })
+    .catch((erro) => console.error("Erro ao obter última tentativa:", erro));
 }
 
-let tentativaAtual = parseInt(sessionStorage.getItem("tentativaAtual"));
-
 function registrarTentativaQuiz() {
+  
     const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual - 1];
     const tituloVar = document.getElementById("spanQuestaoExibida").innerHTML;
     const generoVar = questaoAtual.genero;
@@ -504,9 +516,11 @@ function registrarTentativaQuiz() {
 
           
             if (numeroDaQuestaoAtual >= listaDeQuestoes.length) {
+                let tentativaAtual = parseInt(sessionStorage.getItem("tentativaAtual")) || 1;
                 tentativaAtual++;
-                
-                sessionStorage.setItem("tentativaAtual", tentativaAtual); 
+                sessionStorage.setItem("tentativaAtual", tentativaAtual);
+                alert("Quiz concluído!");
+                finalizarJogo();
             }
         } else {
             resposta.text().then((msg) => alert("Erro: " + msg));
@@ -519,8 +533,6 @@ function registrarTentativaQuiz() {
 
     return false;
 }
-
-
 
 
 </script>
