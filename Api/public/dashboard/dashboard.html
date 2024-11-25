@@ -10,11 +10,13 @@
 
     <link rel="stylesheet" href="./../css/dashboards.css">
     <link rel="stylesheet" href="./../css/estilo.css" />
-    <script src="../js/sessao.js"></script>
+
     <script src="./../js/alerta.js"></script>
+    <script src="./../js/sessao.js"></script>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
 
     <!-- scripts do Chart.js - 2022-1 -->
@@ -35,17 +37,24 @@
             </div>
 
             <div class="btn-logout" onclick="quiz()">
-                <h3>Voltar</h3>
+                <h3>Quiz</h3>
             </div>
+            <div class="btn-logout" onclick="index()">
+                <h3>Inicio</h3>
+            </div>
+            <div class="btn-logout" onclick="limparSessao()">
+                <h3>Deslogar</h3>
+            </div>
+
         </div>
 
-        
+
         <div class="dash">
 
             <div style="color: white;" id="mensagemFeminino"></div>
             <div style="color: white;" id="mensagemMasculino"></div>
             <div id="graficos">
-              
+
             </div>
         </div>
     </div>
@@ -54,72 +63,77 @@
 </html>
 
 <script>
-     function quiz(){
-    window.location.replace("./quiz.html"); 
-  }
-  window.onload = function() {
-            
-            const nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
-
-            if (nomeUsuario) {
-                
-                document.getElementById('b_usuario').innerHTML = nomeUsuario;  
-
-                
-                obterDadosUsuario(nomeUsuario);
-            } else {
-                console.error("Usuário não encontrado no sessionStorage.");
-            }
-
-            
-            exibirGraficoDoUsuario();
-        };
-        function obterDadosUsuario(nomeUsuario) {
-    fetch("/dashboard/dados-usuario?nome=" + nomeUsuario)
-        .then((response) => response.json())
-        .then((json) => {
-            console.log(json.lista[0], json.lista[1]);
-            
-            exibirMensagemPersonalizada(json.lista[0], json.lista[1]);
-        })
-        .catch((erro) => {
-            console.error("Erro ao obter dados do usuário:", erro);
-        });
-}
-
-function exibirMensagemPersonalizada(a, b) {
     let mensagemFeminino = 'Nenhuma contribuição registrada para o gênero feminino.';
     let mensagemMasculino = 'Nenhuma contribuição registrada para o gênero masculino.';
+    function index() {
 
-    
-    // if (!Array.isArray(dados)) {
-    //     dados = [dados]; 
-    // }
+        window.location = "../index.html"
+    }
 
-    
-   // dados.forEach(dado => {
-        if (a.genero && a.genero.trim().toLowerCase() === 'feminino') {
-            mensagemFeminino = `Parabéns, ${a.nome}, você contribuiu com ${a.pontos_totais} pontos em ${a.tentativa_maxima} tentativas (Feminino).`;
+    function limparSessao() {
+        sessionStorage.clear();
+        window.location = "../login.html";
+    }
+    function quiz() {
+        window.location.replace("./quiz.html");
+    }
+    window.onload = function () {
+        validarSessao()
+        const nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
+
+        if (nomeUsuario) {
+
+            document.getElementById('b_usuario').innerHTML = nomeUsuario;
+
+
+            obterDadosUsuario(nomeUsuario);
+        } else {
+            console.error("Usuário não encontrado no sessionStorage.");
         }
-        if (b.genero && b.genero.trim().toLowerCase() === 'masculino') {
+
+
+        exibirGraficoDoUsuario();
+    };
+    function obterDadosUsuario(nomeUsuario) {
+        fetch("/dashboard/dados-usuario?nome=" + nomeUsuario)
+            .then((response) => response.json())
+            .then((json) => {
+                console.log('Dados recebido do obterDadosUsuario: ', json.lista);
+                console.log(json.lista[0], json.lista[1]);
+
+                exibirMensagemPersonalizada(json.lista[0], json.lista[1], json.lista);
+            })
+            .catch((erro) => {
+
+                console.error("Erro ao obter dados do usuário:", erro);
+
+            });
+    }
+
+    function exibirMensagemPersonalizada(a, b, lista) {
+        // if () {
+
+        if (lista.length < 1) {
+            mensagemFeminino = 'Nenhuma contribuição registrada para o gênero feminino.';
+            mensagemMasculino = 'Nenhuma contribuição registrada para o gênero masculino.';
+        } else {
+            mensagemFeminino = `Parabéns, ${a.nome}, você contribuiu com ${a.pontos_totais} pontos em ${a.tentativa_maxima} tentativas (Feminino).`;
             mensagemMasculino = `Parabéns, ${b.nome}, você contribuiu com ${b.pontos_totais} pontos em ${b.tentativa_maxima} tentativas (Masculino).`;
         }
-   // });
+        // }
 
-    
-    document.getElementById("mensagemFeminino").innerText = mensagemFeminino;
-    document.getElementById("mensagemMasculino").innerText = mensagemMasculino;
-}
-
+        document.getElementById("mensagemFeminino").innerText = mensagemFeminino;
+        document.getElementById("mensagemMasculino").innerText = mensagemMasculino;
+    }
 
 
-   
-function exibirGraficoDoUsuario() {
-    // Gerar o conteúdo do gráfico
-    document.getElementById("graficos").innerHTML = `
+
+
+    function exibirGraficoDoUsuario() {
+        document.getElementById("graficos").innerHTML = `
         <div id="grafico">
             <h3 class="tituloGraficos">
-                <span id="tituloGrafico">Gráfico de Pontos</span>
+                <span id="tituloGrafico">Gráfico de Pontos Totais Separados por genêro</span>
             </h3>
             <div class="graph">
                 <canvas id="myChartCanvas"></canvas>
@@ -130,38 +144,37 @@ function exibirGraficoDoUsuario() {
         </div>
     `;
 
-    // Chama a função para obter e exibir os dados do gráfico
-    obterPontosPorGenero();
-}
-
-function exibirGrafico(idGrafico) {
-    // Esconde todos os gráficos e altera os botões
-    for (let i = 1; i <= 3; i++) {
-        let graficoAtual = document.getElementById(`grafico${i}`);
-        let btnAtual = document.getElementById(`btnGrafico${i}`);
-        if (i !== idGrafico) {
-            graficoAtual.classList.add("display-none");
-            graficoAtual.classList.remove("display-block");
-            btnAtual.classList.remove("btn-pink");
-            btnAtual.classList.add("btn-white");
-        }
+        obterPontosPorGenero();
     }
 
-    // Exibe o gráfico selecionado
-    let graficoExibir = document.getElementById(`grafico${idGrafico}`);
-    graficoExibir.classList.remove("display-none");
-    graficoExibir.classList.add("display-block");
+    function exibirGrafico(idGrafico) {
 
-    // Alterando o estilo do botão
-    let btnExibir = document.getElementById(`btnGrafico${idGrafico}`);
-    btnExibir.classList.remove("btn-white");
-    btnExibir.classList.add("btn-pink");
+        for (let i = 1; i <= 3; i++) {
+            let graficoAtual = document.getElementById(`grafico${i}`);
+            let btnAtual = document.getElementById(`btnGrafico${i}`);
+            if (i !== idGrafico) {
+                graficoAtual.classList.add("display-none");
+                graficoAtual.classList.remove("display-block");
+                btnAtual.classList.remove("btn-pink");
+                btnAtual.classList.add("btn-white");
+            }
+        }
 
-    // Chama a função para obter e exibir o gráfico
-    obterPontosPorGenero();
-    `<canvas id="myChartCanvas"></canvas>`
-}
-    
+
+        let graficoExibir = document.getElementById(`grafico${idGrafico}`);
+        graficoExibir.classList.remove("display-none");
+        graficoExibir.classList.add("display-block");
+
+
+        let btnExibir = document.getElementById(`btnGrafico${idGrafico}`);
+        btnExibir.classList.remove("btn-white");
+        btnExibir.classList.add("btn-pink");
+
+
+        obterPontosPorGenero();
+        `<canvas id="myChartCanvas"></canvas>`
+    }
+
 
     // O gráfico é construído com três funções:
     // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
@@ -175,105 +188,116 @@ function exibirGrafico(idGrafico) {
     //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     //     Para ajustar o "select", ajuste o comando sql em src/models
     function obterPontosPorGenero() {
-    fetch("/dashboard/pontos-por-genero")
-        .then((response) => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error("Erro ao buscar dados do gráfico.");
-            }
-        })
-        .then((dados) => {
-            plotarGraficoDeGenero(dados);
-        })
-        .catch((erro) => {
-            console.error("Erro ao obter pontos por gênero:", erro);
-        });
-}
+        fetch("/dashboard/pontos-por-genero")
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar dados do gráfico.");
+                }
+            })
+            .then((dados) => {
+                plotarGraficoDeGenero(dados);
+            })
+            .catch((erro) => {
+                console.error("Erro ao obter pontos por gênero:", erro);
+            });
+    }
 
     // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
     // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
     // A função *plotarGrafico* também invoca a função *atualizarGrafico*
     function plotarGraficoDeGenero(resposta) {
-    console.log('Iniciando plotagem do gráfico...');
+        console.log('Iniciando plotagem do gráfico...');
 
-  
-    let labels = ['Feminino', 'Masculino'];
 
-   
-    let dados = {
-        labels: labels,
-        datasets: [{
-            label: 'Pontos Totais',
-            data: [resposta.pontos_femininos, resposta.pontos_masculinos],
-            backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)'], 
-            borderColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)'],
-            borderWidth: 1
-        }]
-    };
+        let labels = ['Feminino', 'Masculino'];
 
-    console.log('----------------------------------------------');
-    console.log('Dados recebidos pela função:');
-    console.log(resposta);
-    console.log('----------------------------------------------');
 
-    
-    const config = {
-        type: 'bar', 
-        data: dados,
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true 
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: 'Pontos Totais',
+                data: [resposta.pontos_femininos, resposta.pontos_masculinos],
+                backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)'],
+                borderColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)'],
+                borderWidth:2
+            }]
+
+
+        };
+
+        console.log('----------------------------------------------');
+        console.log('Dados recebidos pela função:');
+        console.log(resposta);
+        console.log('----------------------------------------------');
+
+
+      
+const config = {
+    type: 'bar', // ou o tipo desejado do gráfico
+    data: dados,
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        },
+        plugins: {
+            legend: {
+                labels: {
+                    Color: 'rgb(54, 162, 235)' 
                 }
             }
         }
-    };
+    }
+};
 
 
-    let myChart = new Chart(
-        document.getElementById('myChartCanvas'),
-        config
-    );
-}
+
+        let myChart = new Chart(
+            document.getElementById('myChartCanvas'),
+            config
+        );
+    }
 
     // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
-    // buscando a última medida inserida em tabela contendo as capturas, 
+    // buscando a última medida inserida em tabela contendo as capturas,
 
     //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     //     Para ajustar o "select", ajuste o comando sql em src/models
-    function atualizarGrafico(dados, myChart) {
+    //     function atualizarGrafico(dados, myChart) {
 
-fetch(`/pontos/tempo-real`, { cache: 'no-store' }).then(function (response) {
-    if (response.ok) {
-        response.json().then(function (novoRegistro) {
+    // fetch(`/pontos/tempo-real`, { cache: 'no-store' }).then(function (response) {
+    //     if (response.ok) {
+    //         response.json().then(function (novoRegistro) {
 
-            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-            console.log(`Dados atuais do gráfico:`);
-            console.log(dados);
+    //             console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+    //             console.log(`Dados atuais do gráfico:`);
+    //             console.log(dados);
 
-            // Atualizando os valores no gráfico
-            dados.labels = ["Feminino", "Masculino"]; // Labels fixas para as colunas
+    //             // Atualizando os valores no gráfico
+    //             dados.labels = ["Feminino", "Masculino"]; // Labels fixas para as colunas
 
-            dados.datasets[0].data = [
-                novoRegistro.pontos_femininos,
-                novoRegistro.pontos_masculinos
-            ]; // Atualizando dados para os pontos femininos e masculinos
+    //             dados.datasets[0].data = [
+    //                 novoRegistro.pontos_femininos,
+    //                 novoRegistro.pontos_masculinos
+    //             ]; // Atualizando dados para os pontos femininos e masculinos
 
-            myChart.update();
+    //             myChart.update();
 
-            // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-            setTimeout(() => atualizarGrafico(dados, myChart), 2000);
-        });
-    } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-        setTimeout(() => atualizarGrafico(dados, myChart), 2000);
-    }
-})
-.catch(function (error) {
-    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-});
+    //             // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+    //             setTimeout(() => atualizarGrafico(dados, myChart), 2000);
+    //         });
+    //     } else {
+    //         console.error('Nenhum dado encontrado ou erro na API');
+    //         setTimeout(() => atualizarGrafico(dados, myChart), 2000);
+    //     }
+    // })
+    // .catch(function (error) {
+    //     console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    // });
 
-}
+    // }
 </script>

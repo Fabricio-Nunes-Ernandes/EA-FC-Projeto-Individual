@@ -17,7 +17,7 @@
 body {
     color: var(--new-black);
     background-color: var(--new-white);
-    font-family: 'Barlow', sans-serif;
+    font-family: 'Exo 2', sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -99,6 +99,7 @@ button {
     transition: background-color 0.3s ease;
     margin-top: 100px;
     margin-bottom: 50px;
+    min-width: 150px;
 }
 
 #btnIniciarQuiz:hover {
@@ -112,6 +113,8 @@ button {
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-bottom: 150px;
+    min-width: 150px;
 }
 
 #btndash:hover {
@@ -123,21 +126,7 @@ button {
     width: 100%;
     background-color: #e5e5e5;
 }
-#btnsair {
-    padding: 12px 20px;
-    font-size: 18px;
-    border-radius: 8px;
-    background-color: var(--primary-brand-color);
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 50px;
-    margin-bottom: 150px;
-}
 
-#btnsair:hover {
-    background-color: var(--secondary-brand-color);
-}
 #pontuacaoDuranteJogo, #pontuacaoFinalJogo {
     margin-bottom: 16px;
     background-color: #e5e5e5;

@@ -8,7 +8,10 @@
   <link rel="stylesheet" href="./../css/quiz.css" />
   <link rel="icon" href="./../img/ea logo.png" />
   <script src="./../js/sessao.js"></script>
-  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+      href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet">
 </head>
 
 <body onload="onloadEsconder(), validarSessao()">
@@ -21,9 +24,9 @@
           <a href="./../index.html">Inicial</a>
         </li>
         <li>
-        <li class="agora">
-          <a href="./../quiz.html">Quiz</a>
-        </li>
+      
+          <a href="./dashboard.html">Dashboard</a>
+        
         </li>
         <li>|</li>
         <li>
@@ -39,9 +42,7 @@
     <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
     <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
     
-    <button id="btndash" onclick="dashboard()">DASHBOARD</button>
-
-    <button id="btnsair" onclick=" limparSessao()">DESLOGAR</button>
+    <button id="btndash" onclick="dashboard()">VOLTAR</button>
 
     <div id="pontuacao" class="flex-colunar width-fit-content border-primary">
       <div id="pontuacaoDuranteJogo" class="flex-colunar padding-8">
@@ -49,9 +50,7 @@
         <span class="width-fit-content">Quantidade de erros: <span id="spanErradas"></span></span>
       </div>
       <div id="pontuacaoFinalJogo" class="flex-colunar padding-8">
-        <!-- <span id="pontuacaoFinal" class="width-fit-content">Pontuação Final:
-                    <span id="spanPontuacaoFinal">***</span>
-                </span> -->
+       
         <span id="msgFinal" class="width-fit-content">***</span>
       </div>
     </div>
@@ -109,7 +108,7 @@
 
       <br>
 
-      <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
+      <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Voltar</button>
 
 
     </div>
@@ -128,6 +127,7 @@
 
 </html>
 <script>
+
   function dashboard(){
     window.location.replace("./dashboard.html"); 
   }
@@ -256,7 +256,8 @@
     document.getElementById('pontuacao').style.display = "flex"
     document.getElementById('jogo').style.display = "flex"
     document.getElementById('btnIniciarQuiz').style.display = "none"
-
+    document.getElementById('btndash').style.display = "none"
+    document.getElementById('btnTentarNovamente').style.display = "none"
     document.getElementById('qtdQuestoes').innerHTML = quantidadeDeQuestoes
 
     preencherHTMLcomQuestaoAtual(0)
@@ -264,6 +265,8 @@
     btnSubmeter.disabled = false
     btnProx.disabled = true
     btnTentarNovamente.disabled = true
+
+
   }
 
   function preencherHTMLcomQuestaoAtual(index) {
@@ -272,7 +275,7 @@
     const questaoAtual = listaDeQuestoes[index];
     numeroDaQuestaoAtual = index;
 
-    // Atualizando informações de texto
+   
     document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = Number(index) + 1;
     document.getElementById("spanQuestaoExibida").innerHTML = questaoAtual.pergunta;
     document.getElementById("labelOpcaoUm").innerHTML = questaoAtual.alternativaA;
@@ -280,7 +283,7 @@
     document.getElementById("labelOpcaoTres").innerHTML = questaoAtual.alternativaC;
     document.getElementById("labelOpcaoQuatro").innerHTML = questaoAtual.alternativaD;
 
-    // Atualizando imagens
+    
     document.querySelector(".imagem-pergunta").src = questaoAtual.imagemPergunta;
     document.getElementById("imgAlternativaA").src = questaoAtual.imagensAlternativas[0];
     document.getElementById("imgAlternativaB").src = questaoAtual.imagensAlternativas[1];
@@ -364,7 +367,7 @@
   }
 
   function tentarNovamente() {
-    // atualiza a página
+    
     window.location.reload()
   }
 
@@ -429,6 +432,7 @@
   }
 
   function finalizarJogo() {
+     document.getElementById('btnTentarNovamente').style.display = "flex"
     let textoParaMensagemFinal = null
     let classComCoresParaMensagemFinal = null
     var pontos_possiveis = 32

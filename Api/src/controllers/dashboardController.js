@@ -30,7 +30,10 @@ function obterDadosUsuario(req, res) {
                     lista: resultado
                 }); // Retorna o primeiro resultado
             } else {
-                res.status(404).send("Nenhum dado encontrado para o usuário.");
+                res.json({
+                    lista: resultado
+                })
+                // res.status(404).send("Nenhum dado encontrado para o usuário.");
             }
         })
         .catch((erro) => {

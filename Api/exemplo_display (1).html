@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="div_botoes">
+      <button onclick="exibir_vermelha()">Exibir Vermelha</button>
+      <button onclick="esconder_vermelha()">Esconder Vermelha</button>
+      <button onclick="trocar_vermelha()">Trocar Vermelha</button>
+    </div>
+
+    <div id="div_vermelha" style="display: none; background-color: red; width: 100px; height: 100px;"></div>
+  </body>
+</html>
+
+<script>
+  function exibir_vermelha() {
+    div_vermelha.style.display = "block"; // block, flex, grid... qualquer display que seja "visível"
+  }
+
+  function esconder_vermelha() {
+    div_vermelha.style.display = "none"; // none indica que não há display, ou seja, não haverá visibilidade para o elemento
+  }
+
+  function trocar_vermelha() {
+    if (div_vermelha.style.display == "none") {
+      exibir_vermelha(); // exemplo de como executar a função que força o display block
+    } else {
+      esconder_vermelha(); // exemplo de como executar a função que força o display none
+    }
+  }
+</script>
