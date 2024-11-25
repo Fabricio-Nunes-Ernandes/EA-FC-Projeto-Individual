@@ -19,7 +19,7 @@ function buscarDadosUsuario(nomeUsuario) {
             FROM tentativa
             JOIN usuario ON usuario.idUsuario = tentativa.fkUsuario
             WHERE usuario.nome = '${nomeUsuario}'  -- Concatenando o valor diretamente
-            GROUP BY usuario.nome, genero;
+            GROUP BY genero , usuario.nome;
         `;
     
       

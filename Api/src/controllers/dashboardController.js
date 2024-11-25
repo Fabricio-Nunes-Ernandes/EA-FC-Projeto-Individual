@@ -26,7 +26,9 @@ function obterDadosUsuario(req, res) {
     modelo.buscarDadosUsuario(nomeUsuario)
         .then((resultado) => {
             if (resultado.length > 0) {
-                res.json(resultado[0]); // Retorna o primeiro resultado
+                res.json({
+                    lista: resultado
+                }); // Retorna o primeiro resultado
             } else {
                 res.status(404).send("Nenhum dado encontrado para o usuário.");
             }

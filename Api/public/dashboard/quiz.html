@@ -18,7 +18,7 @@
       <img src="./../img/ea logo.png" alt="">
       <ul class="navbar">
         <li>
-          <a href="./index.html">Inicial</a>
+          <a href="./../index.html">Inicial</a>
         </li>
         <li>
         <li class="agora">
@@ -38,6 +38,10 @@
   <div id="pontuacaoEJogo">
     <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
     <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
+    
+    <button id="btndash" onclick="dashboard()">DASHBOARD</button>
+
+    <button id="btnsair" onclick=" limparSessao()">DESLOGAR</button>
 
     <div id="pontuacao" class="flex-colunar width-fit-content border-primary">
       <div id="pontuacaoDuranteJogo" class="flex-colunar padding-8">
@@ -124,6 +128,9 @@
 
 </html>
 <script>
+  function dashboard(){
+    window.location.replace("./dashboard.html"); 
+  }
   const listaDeQuestoes = [
     {
       pergunta: "Qual a nacionalidade da Aitana Bonmatí?",

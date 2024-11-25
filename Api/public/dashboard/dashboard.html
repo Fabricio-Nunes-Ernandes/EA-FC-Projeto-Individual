@@ -2,138 +2,115 @@
 <html lang="pt-br">
 
 <head>
-    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+    <link rel="icon" href="./../img/ea logo.png" />
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AquaTech | Dashboards</title>
+    <title>Dashboards</title>
 
-    
     <link rel="stylesheet" href="./../css/dashboards.css">
     <link rel="stylesheet" href="./../css/estilo.css" />
     <script src="../js/sessao.js"></script>
     <script src="./../js/alerta.js"></script>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
 
     <!-- scripts do Chart.js - 2022-1 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!--FONT AWESOME-->
+    <!-- FONT AWESOME -->
     <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
 </head>
 
-<!-- <body onload=" atualizarFeed()"> -->
-
 <body>
-
     <div class="janela">
+        <!-- Menu lateral esquerdo -->
         <div class="header-left">
-            <h1>AquaTech</h1>
+            <img src="./../img/ea logo.png" alt="">
 
             <div class="hello">
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
 
-            <div class="btn-nav-white">
-                <a href="./cards.html">
-                    <h3>Aquários</h3>
-                </a>
+            <div class="btn-logout" onclick="quiz()">
+                <h3>Voltar</h3>
             </div>
-
-            <div class="btn-nav">
-
-                <h3>Gráficos</h3>
-
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="./mural.html">
-                    <h3>Mural de Avisos</h3>
-                </a>
-            </div>
-
-            <div class="btn-logout" onclick="limparSessao()">
-                <h3>Sair</h3>
-            </div>
-
         </div>
 
+        
         <div class="dash">
-            <div id="alerta">
-            </div>
 
-            <div class="btns-dash" id="btnGrafico">
-                
-                <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
-            </div>
             <div style="color: white;" id="mensagemFeminino"></div>
             <div style="color: white;" id="mensagemMasculino"></div>
             <div id="graficos">
+              
             </div>
         </div>
     </div>
- 
-
 </body>
 
 </html>
 
 <script>
+     function quiz(){
+    window.location.replace("./quiz.html"); 
+  }
   window.onload = function() {
-            // Acessa o sessionStorage no lado do cliente
+            
             const nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
 
             if (nomeUsuario) {
-                // Exibe o nome do usuário dentro do span
+                
                 document.getElementById('b_usuario').innerHTML = nomeUsuario;  
 
-                // Chama a função para obter os dados do usuário e exibir no gráfico
+                
                 obterDadosUsuario(nomeUsuario);
             } else {
                 console.error("Usuário não encontrado no sessionStorage.");
             }
 
-            // Exibe os gráficos do usuário
+            
             exibirGraficoDoUsuario();
         };
         function obterDadosUsuario(nomeUsuario) {
     fetch("/dashboard/dados-usuario?nome=" + nomeUsuario)
         .then((response) => response.json())
-        .then((dados) => {
-            console.log(dados);
-            exibirMensagemPersonalizada(dados);
+        .then((json) => {
+            console.log(json.lista[0], json.lista[1]);
+            
+            exibirMensagemPersonalizada(json.lista[0], json.lista[1]);
         })
         .catch((erro) => {
             console.error("Erro ao obter dados do usuário:", erro);
         });
 }
 
-function exibirMensagemPersonalizada(dados) {
-    // Garantir que dados seja um array
-    if (!Array.isArray(dados)) {
-        dados = [dados]; // Converte para array se não for
-    }
-
-    // Exibe os dados assumindo que o índice 0 é feminino e o índice 1 é masculino
+function exibirMensagemPersonalizada(a, b) {
     let mensagemFeminino = 'Nenhuma contribuição registrada para o gênero feminino.';
     let mensagemMasculino = 'Nenhuma contribuição registrada para o gênero masculino.';
 
-    if (dados[0]) { // Verifica se há dados para o índice 0
-        mensagemFeminino = `Parabéns, ${dados[0].nome}, você contribuiu com ${dados[0].pontos_totais} pontos em ${dados[0].tentativa_maxima} tentativas (Feminino).`;
-    }
+    
+    // if (!Array.isArray(dados)) {
+    //     dados = [dados]; 
+    // }
 
-    if (dados[1]) { // Verifica se há dados para o índice 1
-        mensagemMasculino = `Parabéns, ${dados[1].nome}, você contribuiu com ${dados[1].pontos_totais} pontos em ${dados[1].tentativa_maxima} tentativas (Masculino).`;
-    }
+    
+   // dados.forEach(dado => {
+        if (a.genero && a.genero.trim().toLowerCase() === 'feminino') {
+            mensagemFeminino = `Parabéns, ${a.nome}, você contribuiu com ${a.pontos_totais} pontos em ${a.tentativa_maxima} tentativas (Feminino).`;
+        }
+        if (b.genero && b.genero.trim().toLowerCase() === 'masculino') {
+            mensagemMasculino = `Parabéns, ${b.nome}, você contribuiu com ${b.pontos_totais} pontos em ${b.tentativa_maxima} tentativas (Masculino).`;
+        }
+   // });
 
-    // Exibe as mensagens separadas
+    
     document.getElementById("mensagemFeminino").innerText = mensagemFeminino;
     document.getElementById("mensagemMasculino").innerText = mensagemMasculino;
 }
+
 
 
    
@@ -220,16 +197,16 @@ function exibirGrafico(idGrafico) {
     function plotarGraficoDeGenero(resposta) {
     console.log('Iniciando plotagem do gráfico...');
 
-    // Criando estrutura para plotar gráfico - labels
+  
     let labels = ['Feminino', 'Masculino'];
 
-    // Criando estrutura para plotar gráfico - dados
+   
     let dados = {
         labels: labels,
         datasets: [{
             label: 'Pontos Totais',
             data: [resposta.pontos_femininos, resposta.pontos_masculinos],
-            backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)'], // Cor para feminino e masculino
+            backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)'], 
             borderColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)'],
             borderWidth: 1
         }]
@@ -240,21 +217,21 @@ function exibirGrafico(idGrafico) {
     console.log(resposta);
     console.log('----------------------------------------------');
 
-    // Criando estrutura para plotar gráfico - configuração
+    
     const config = {
-        type: 'bar', // Tipo de gráfico: colunas
+        type: 'bar', 
         data: dados,
         options: {
             responsive: true,
             scales: {
                 y: {
-                    beginAtZero: true // Início do eixo Y no zero
+                    beginAtZero: true 
                 }
             }
         }
     };
 
-    // Adicionando gráfico criado em div na tela
+
     let myChart = new Chart(
         document.getElementById('myChartCanvas'),
         config
