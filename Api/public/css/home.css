@@ -234,3 +234,43 @@ input::placeholder {
     justify-content: center;
     align-items: center;   
 }
+
+.gallery-container {
+    text-align: center; /* Centraliza o título da galeria */
+    margin: 20px auto;
+  }
+  
+  .gallery-title {
+    font-size: 24px; /* Tamanho do título */
+    margin-bottom: 20px; /* Espaço entre o título e as imagens */
+    color: white;
+  }
+  
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 colunas por fileira */
+    gap: 15px; /* Espaço entre as imagens */
+    margin: 0 auto; /* Centraliza a galeria na página */
+    width: 80%; /* Largura da galeria */
+  }
+  
+  .gallery img {
+    width: 100%; /* Largura da imagem preenche o espaço */
+    height: 200px; /* Altura fixa */
+    object-fit: contain; /* Mantém a imagem inteira, sem cortar */
+    background-color: #f0f0f0; /* Fundo neutro */
+    border-radius: 8px; /* Cantos arredondados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve */
+    transition: transform 0.2s;
+  }
+  
+  /* Centraliza a última imagem se ela estiver sozinha na última fileira */
+  .gallery img:nth-last-child(1) {
+    grid-column: span 5; /* A última imagem ocupa 5 colunas */
+    justify-self: center; /* Centraliza a imagem horizontalmente */
+  }
+
+  .gallery img:hover {
+    transform: scale(1.05); /* Aumenta um pouco a imagem ao passar o mouse */
+  }
+  

@@ -65,24 +65,25 @@
                          Assim que inserir vá para o script abaixo.
                      -->
          
-            <p class="p">Nome:</p>
-            <input id="nome_input" type="text" />
-          
-         
-            <p class="p">Celular:</p>
-            <input id="celular_input" type="text" />
-          
-         
-            <p class="p">E-mail:</p>
-            <input id="email_input" type="text"/>
-          
-         
-            <p class="p">Senha:</p>
-            <input id="senha_input" type="password" placeholder="******" />
-          
-         
-            <p class="p">Confirmação da Senha:</p>
-            <input id="confirmacao_senha_input" type="password" placeholder="******" />
+                     <p class="p">Nome:</p>
+                     <input id="nome_input" type="text" />
+                     <div id="div_mensagem_nome" class="erro"></div>
+                     
+                     <p class="p">Celular:</p>
+                     <input id="celular_input" type="text" />
+                     <div id="div_mensagem_celular" class="erro"></div>
+                     
+                     <p class="p">E-mail:</p>
+                     <input id="email_input" type="text" />
+                     <div id="div_mensagem_email" class="erro"></div>
+                     
+                     <p class="p">Senha:</p>
+                     <input id="senha_input" type="password" placeholder="******" />
+                     <div id="div_mensagem_senha" class="erro"></div>
+                     
+                     <p class="p">Confirmação da Senha:</p>
+                     <input id="confirmacao_senha_input" type="password" placeholder="******" />
+                     <div id="div_mensagem_senha_confirmacao" class="erro"></div>
           
           <button class="botao" onclick="cadastrar()">Cadastrar</button>
         
@@ -115,90 +116,147 @@
   let listaEmpresasCadastradas = [];
 
   function cadastrar() {
-    // aguardar();
+    // Recuperando valores das inputs
+    var nomeVar = nome_input.value.trim();
+    var celularVar = celular_input.value.trim();
+    var emailVar = email_input.value.trim();
+    var senhaVar = senha_input.value.trim();
+    var confirmacaoSenhaVar = confirmacao_senha_input.value.trim();
 
-    //Recupere o valor da nova input pelo nome do id
-    // Agora vá para o método fetch logo abaixo
-    var nomeVar = nome_input.value;
-    var celularVar = celular_input.value;
-    var emailVar = email_input.value;
-    var senhaVar = senha_input.value;
-    var confirmacaoSenhaVar = confirmacao_senha_input.value;
-  
+    // Inicializando variáveis de mensagens de erro
+    var mensagem_celular = "";
+    var mensagem_email = "";
+    var mensagem_senha = "";
+    var mensagem_senha_confirmacao = "";
+    var cadastro = 0;
 
-    // Verificando se há algum campo em branco
+    // Validando campos em branco
     if (
-      nomeVar == "" ||
-      celularVar == "" ||
-      emailVar == "" ||
-      senhaVar == "" ||
-      confirmacaoSenhaVar == "" 
+        nomeVar === "" ||
+        celularVar === "" ||
+        emailVar === "" ||
+        senhaVar === "" ||
+        confirmacaoSenhaVar === ""
     ) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
-
-      finalizarAguardar();
-      return false;
-    } else {
-      setInterval(sumirMensagem, 5000);
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = "Por favor, preencha todos os campos.";
+        return false;
     }
 
-    // Verificando se o código de ativação é de alguma empresa cadastrada
-    // for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
-    //   if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
-    //     idEmpresaVincular = listaEmpresasCadastradas[i].id
-    //     console.log("Código de ativação válido.");
-    //     break;
-    //   } else {
-    //     cardErro.style.display = "block";
-    //     mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
-    //     finalizarAguardar();
-    //   }
-    // }
+    // Validação do celular
+    var tamanho_celular = celularVar.length;
+    if (tamanho_celular != 11) {
+        mensagem_celular = `<b>Telefone:</b> Número de telefone inválido. Deve ter 11 caracteres.`;
+        cadastro++;
+    }
+    div_mensagem_celular.innerHTML = mensagem_celular;
 
-    // Enviando o valor da nova input
-    fetch("/usuarios/cadastrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        nomeServer: nomeVar,
-        celularServer: celularVar,
-        emailServer: emailVar,
-        senhaServer: senhaVar
-        
-      }),
-    })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
+    // Validação do email
+    var email_arroba = emailVar.includes("@");
+    if (!email_arroba) {
+        mensagem_email = `<b>Email:</b> O email deve conter "@"`;
+        cadastro++;
+    }
+    div_mensagem_email.innerHTML = mensagem_email;
 
-        if (resposta.ok) {
-          cardErro.style.display = "block";
+    // Validação da senha
+    var senha_caracter_especial =
+        senhaVar.includes("@") ||
+        senhaVar.includes("#") ||
+        senhaVar.includes("$") ||
+        senhaVar.includes("!") ||
+        senhaVar.includes("%");
+    if (!senha_caracter_especial) {
+        mensagem_senha += `A senha deve conter ao menos um caractere especial (@, #, $, !, %).<br>`;
+        cadastro++;
+    }
 
-          mensagem_erro.innerHTML =
-            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+    var senha_numero = /\d/.test(senhaVar);
+    if (!senha_numero) {
+        mensagem_senha += "A senha deve conter ao menos um número.<br>";
+        cadastro++;
+    }
 
-          setTimeout(() => {
-            window.location = "login.html";
-          }, "2000");
+    var tamanho_senha = senhaVar.length;
+    if (tamanho_senha < 8) {
+        mensagem_senha += "A senha deve ter ao menos 8 caracteres.<br>";
+        cadastro++;
+    }
 
-          limparFormulario();
-          finalizarAguardar();
-        } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
+    var letra_maiuscula = false;
+    var letra_minuscula = false;
+
+    for (var contador = 0; contador < tamanho_senha; contador++) {
+        var letra = senhaVar[contador];
+        if (letra.toLowerCase() !== letra) {
+            letra_maiuscula = true;
         }
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
-      });
+        if (letra.toUpperCase() !== letra) {
+            letra_minuscula = true;
+        }
+    }
 
-    return false;
-  }
+    if (!letra_maiuscula) {
+        mensagem_senha += "A senha deve conter ao menos uma letra maiúscula.<br>";
+        cadastro++;
+    }
+    if (!letra_minuscula) {
+        mensagem_senha += "A senha deve conter ao menos uma letra minúscula.<br>";
+        cadastro++;
+    }
+    div_mensagem_senha.innerHTML = mensagem_senha;
+
+    // Validação da confirmação da senha
+    if (senhaVar !== confirmacaoSenhaVar) {
+        mensagem_senha_confirmacao = "As senhas não coincidem.";
+        cadastro++;
+    }
+    div_mensagem_senha_confirmacao.innerHTML = mensagem_senha_confirmacao;
+
+    // Caso todas as validações passem
+    if (cadastro === 0) {
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                nomeServer: nomeVar,
+                celularServer: celularVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    cardErro.style.display = "block";
+
+                    mensagem_erro.innerHTML =
+                        "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                    setTimeout(() => {
+                        window.location = "login.html";
+                    }, 2000);
+
+                    limparFormulario();
+                    finalizarAguardar();
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                finalizarAguardar();
+            });
+
+        return false;
+    }
+}
+
+
+  
 
   // Listando empresas cadastradas 
   // function listar() {
