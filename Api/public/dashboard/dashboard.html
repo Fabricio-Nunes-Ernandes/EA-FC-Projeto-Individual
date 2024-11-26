@@ -94,27 +94,49 @@
 
         exibirGraficoDoUsuario();
     };
-    function obterDadosUsuario(nomeUsuario, totalFeminino, totalMasculino) {
+    function obterDadosUsuario(nomeUsuario) {
     fetch("/dashboard/dados-usuario?nome=" + nomeUsuario)
         .then((response) => response.json())
         .then((json) => {
             console.log('Dados do usuário:', json.lista);
-            // Exibir a mensagem personalizada com os dados do usuário e os totais de pontos por gênero
-            exibirMensagemPersonalizada(json.lista[0], json.lista[1], json.lista, totalFeminino, totalMasculino);
+
+            
+            fetch("/dashboard/pontos-por-genero")
+                .then((response) => response.json())
+                .then((totais) => {
+                    const totalFeminino = totais.pontos_femininos || 0;
+                    const totalMasculino = totais.pontos_masculinos || 0;
+
+                    console.log("OLAAAA" + totalFeminino, totalMasculino)
+
+                    console.log(totalMasculino)
+                    
+                    exibirMensagemPersonalizada(
+                        json.lista[0],
+                        json.lista[1],
+                        json.lista,
+                        totalFeminino,
+                        totalMasculino
+                    );
+                });
         })
         .catch((erro) => {
             console.error("Erro ao obter dados do usuário:", erro);
         });
 }
 
-    function exibirMensagemPersonalizada(a, b, lista, totalFeminino, totalMasculino) {
+
+function exibirMensagemPersonalizada(a, b, lista, totalFeminino, totalMasculino) {
+    console.log(totalMasculino)
     if (lista.length < 1) {
         mensagemFeminino = 'Nenhuma contribuição registrada para o gênero feminino.';
         mensagemMasculino = 'Nenhuma contribuição registrada para o gênero masculino.';
     } else {
-        // Calculando a porcentagem para cada gênero separadamente
-        const percentualFeminino = ((a.pontos_totais / totalFeminino) * 100).toFixed(2);
-        const percentualMasculino = ((b.pontos_totais / totalMasculino) * 100).toFixed(2);
+        console.log(totalMasculino)
+        const percentualFeminino = (a.pontos_totais / totalFeminino * 100).toFixed(2);
+        const percentualMasculino = (b.pontos_totais / totalMasculino * 100).toFixed(2);
+
+        console.log(percentualFeminino, percentualMasculino)
 
         mensagemFeminino = `Você contribuiu com ${a.pontos_totais} pontos em ${a.tentativa_maxima} tentativas (Feminino). Isso equivale a ${percentualFeminino}% do total geral de pontos femininos.`;
         mensagemMasculino = `Você contribuiu com ${b.pontos_totais} pontos em ${b.tentativa_maxima} tentativas (Masculino). Isso equivale a ${percentualMasculino}% do total geral de pontos masculinos.`;
@@ -123,14 +145,11 @@
     document.getElementById("mensagemFeminino").innerText = mensagemFeminino;
     document.getElementById("mensagemMasculino").innerText = mensagemMasculino;
 }
-
-
-
     function exibirGraficoDoUsuario() {
         document.getElementById("graficos").innerHTML = `
         <div id="grafico">
             <h3 class="tituloGraficos">
-                <span id="tituloGrafico">Gráfico de Pontos Totais Separados por genêro</span>
+                <span id="tituloGrafico">Gráfico de Pontos Totais Separados por gênero</span>
             </h3>
             <div class="graph">
                 <canvas id="myChartCanvas"></canvas>
@@ -184,22 +203,50 @@
 
     //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     //     Para ajustar o "select", ajuste o comando sql em src/models
+    // function obterPontosPorGenero() {
+    //     fetch("/dashboard/pontos-por-genero")
+    //         .then((response) => {
+    //             if (response.ok) {
+    //                 return response.json();
+    //             } else {
+    //                 throw new Error("Erro ao buscar dados do gráfico.");
+    //             }
+    //         })
+    //         .then((dados) => {
+    //             plotarGraficoDeGenero(dados);
+    //         })
+    //         .catch((erro) => {
+    //             console.error("Erro ao obter pontos por gênero:", erro);
+    //         });
+    // }
+
     function obterPontosPorGenero() {
-        fetch("/dashboard/pontos-por-genero")
-            .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error("Erro ao buscar dados do gráfico.");
-                }
-            })
-            .then((dados) => {
-                plotarGraficoDeGenero(dados);
-            })
-            .catch((erro) => {
-                console.error("Erro ao obter pontos por gênero:", erro);
-            });
-    }
+    fetch("/dashboard/pontos-por-genero")
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Erro ao buscar dados do gráfico.");
+            }
+        })
+        .then((dados) => {
+            
+            plotarGraficoDeGenero(dados);
+
+            console.log(dados.pontos_femininos)
+            const totalFeminino = dados.pontos_femininos || 0;
+            const totalMasculino = dados.pontos_masculinos || 0;
+
+           
+            console.log("Total Feminino:", totalFeminino);
+            console.log("Total Masculino:", totalMasculino);
+        })
+        .catch((erro) => {
+            console.error("Erro ao obter pontos por gênero:", erro);
+        });
+}
+
+  
 
     // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
     // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
