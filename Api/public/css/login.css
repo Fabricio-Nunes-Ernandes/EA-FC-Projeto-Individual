@@ -1,7 +1,3 @@
-/* Adicionar aqui toda a estilização criada para sua aplicação. */
-
-@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
 
 body {
      margin: 0;
@@ -36,13 +32,6 @@ body {
     margin: auto;
 }
 
-/* .container2{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin: auto;
-} */
 
 .header .container{
     justify-content: space-between;
@@ -97,38 +86,6 @@ body {
 }
 
 
-
-
-/* .social{
-    background-color: #e5e5e5;
-    display: flex;
-    border: 6px solid #23CE68;
-    border-radius: 8px;
-    width: 50%;
-    padding-bottom: 40px;
-    margin-bottom: 20px;
-   
-    margin-right: 20px;
-} */
-
-.social .container2 .boxes{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 100%;
-
-}
-
-/* .boxes {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start; 
-    text-align: start;
-    width: 60%; 
-    padding-left: 25%;
-} */
-
-
 .footer {
     background-color: #ffff;
     height: var(--tamanho-footer);
@@ -147,28 +104,6 @@ body {
 .footer img{
     height: 50px;
  }
-.version {
-    font-size: 12px;
-}
-
-/* .botao{
-   color: black;
-   background-color: #23CE68;
-   border: none;
-   border-radius: 5px;
-   width: 30%;
-   height: 5px;
-   padding: 30px;
-   font-size: 16px;
-   font-weight: 600;
-   cursor: pointer;
-   display: flex; 
-   justify-content: center; 
-   align-items: center;
-   margin-bottom: 10px;
-   margin-top: 20px;
-   margin-left: 19%;
-  } */
 
   .container2 {
     display: flex;
@@ -176,43 +111,39 @@ body {
     align-items: flex-start;
     width: 100%;
     margin: auto;
-    padding: 20px; /* Adiciona espaço interno */
-    box-sizing: border-box; /* Inclui padding no cálculo da largura */
+    padding: 20px;
 }
 
 .social {
     background-color: #e5e5e5;
     display: flex;
-    flex-direction: column; /* Alinha conteúdo verticalmente */
-    align-items: center; /* Centraliza horizontalmente */
+    flex-direction: column; 
+    align-items: center; 
     border: 6px solid #23CE68;
     border-radius: 8px;
-    width: 40%; /* Ajusta largura */
-    padding: 20px; /* Adiciona espaço interno */
-    box-sizing: border-box;
+    width: 40%; 
+    padding: 20px;
+    
 }
 
 .boxes {
     display: flex;
-    flex-direction: column; /* Organiza os itens na vertical */
-    align-items: flex-start; /* Alinha os itens à esquerda */
-    justify-content: flex-start; /* Coloca o conteúdo no topo */
-    width: 100%; /* Usa toda a largura disponível */
-    text-align: left; /* Garante que o texto seja alinhado à esquerda */
-    padding: 10px; /* Adiciona espaço interno para o texto */
+    flex-direction: column; 
+    align-items: flex-start; 
+    justify-content: flex-start; 
+    width: 100%; 
+    text-align: left; 
+    padding: 10px; 
     margin-left: 120px;
-    box-sizing: border-box; /* Inclui o padding no cálculo da largura */
 }
-
-
 
 .botao {
     color: black;
     background-color: #23CE68;
     border: none;
     border-radius: 5px;
-    width: 40%; /* Ajusta largura para ficar proporcional */
-    padding: 10px; /* Adiciona padding consistente */
+    width: 40%; 
+    padding: 10px; 
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
@@ -245,108 +176,15 @@ input {
 
   }
   
-
-  #div_erros_login {
+#div_erros_login {
     display: none
   }
   
-  /* FORMULARIO */
-  
-  .alerta_erro{
-    display: flex;
-    justify-content: flex-end;
-  }
-  
-  .card_erro {
-    display: none;
-    background-color: #fff;
-    color: black;
-    width: 230px;
-    position: fixed;
-    border-radius: 4px;
-    border: #ED145B 3px solid;
-    padding: 10px;
-    margin-right: 10%;
-  }
-  
-  .card_erro #mensagem_erro{
-    font-weight: 500;
-    font-size: 20px;
-  }
-
-  .btn {
-    font-family: "Barlow", sans-serif;
-    border: 0;
-    border-radius: 5px;
-    font-weight: 600;
-    font-size: 18px;
-    padding: 10px 15px;
-    color: white;
-    background-color: #ED145B;
-    width: 120px;
-    align-self: center;
-    margin-top: 5px;
-  }
-  
+ 
  
   
 
   
-  /* SIMULADOR */
+
   
-  .simulador {
-    color: white;
-  }
   
-  .simulador .container {
-    flex-direction: column;
-    overflow: scroll; 
-    height: var(--tamanho-simulador);
-  }
-  
-  /* ALERTA */
-  
-  #alerta {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-  }
-  
-  .mensagem-alarme {
-    background-color: white;
-    border-radius: 5px;
-    width: 300px;
-    height: 80px;
-    margin: 10px;
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-  }
-  
-  .mensagem-alarme h3 {
-    font-size: 14px;
-    margin: 0;
-  }
-  
-  .mensagem-alarme .informacao {
-    width: 66%;
-  }
-  
-  .alarme-sino {
-    width: 48px;
-    height: 48px;
-    animation-name: bell;
-    animation-duration: 4s;
-    background-image: url('https://cdn-icons-png.flaticon.com/512/1157/1157000.png');
-    background-size: cover;
-    animation-iteration-count: infinite;
-  }
-  
-  @keyframes bell {
-    0%   {transform: rotate(25deg)}
-    25%  {transform: rotate(-25deg)}
-    50%  {transform: rotate(25deg)}
-    75%  {transform: rotate(-25deg)}
-    100% {transform: rotate(25deg)}
-  }

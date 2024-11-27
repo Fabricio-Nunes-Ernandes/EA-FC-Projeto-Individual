@@ -60,11 +60,7 @@
   <div class="social">
     <div class="containerbody">
       <div class="boxes">
-          <!--
-                         Para inserir mais um campo, copie uma das inputs abaixo.
-                         Assim que inserir vá para o script abaixo.
-                     -->
-         
+          
                      <p class="p">Nome:</p>
                      <input id="nome_input" type="text" />
                      <div id="div_mensagem_nome" class="erro"></div>
@@ -87,8 +83,8 @@
           
           <button class="botao" onclick="cadastrar()">Cadastrar</button>
         
-        <div id="div_aguardar" class="loading-div">
-          <img src="./assets/circle-loading.gif" id="loading-gif" />
+        <div id="div_aguardar">
+          
         </div>
 
         <div id="div_erros_login"></div>
@@ -97,14 +93,14 @@
   </div>
 
 </div>
-  <!--footer inicio-->
+
   <div class="footer">
     <div class="container">
       <img src="./../img/ea logo.png" alt="">
       <h4>Fabrício Todos os direitos reservados</h4>
     </div>
   </div>
-  <!--footer fim-->
+ 
 </body>
 
 </html>
@@ -112,25 +108,24 @@
 
 <script>
   let idUsuario = sessionStorage.ID_USUARIO
-  // Array para armazenar empresas cadastradas para validação de código de ativação 
-  let listaEmpresasCadastradas = [];
+ 
 
   function cadastrar() {
-    // Recuperando valores das inputs
+   
     var nomeVar = nome_input.value.trim();
     var celularVar = celular_input.value.trim();
     var emailVar = email_input.value.trim();
     var senhaVar = senha_input.value.trim();
     var confirmacaoSenhaVar = confirmacao_senha_input.value.trim();
 
-    // Inicializando variáveis de mensagens de erro
+    
     var mensagem_celular = "";
     var mensagem_email = "";
     var mensagem_senha = "";
     var mensagem_senha_confirmacao = "";
     var cadastro = 0;
 
-    // Validando campos em branco
+   
     if (
         nomeVar === "" ||
         celularVar === "" ||
@@ -143,7 +138,7 @@
         return false;
     }
 
-    // Validação do celular
+  
     var tamanho_celular = celularVar.length;
     if (tamanho_celular != 11) {
         mensagem_celular = `<b>Telefone:</b> Número de telefone inválido. Deve ter 11 caracteres.`;
@@ -151,7 +146,6 @@
     }
     div_mensagem_celular.innerHTML = mensagem_celular;
 
-    // Validação do email
     var email_arroba = emailVar.includes("@");
     if (!email_arroba) {
         mensagem_email = `<b>Email:</b> O email deve conter "@"`;
@@ -159,7 +153,7 @@
     }
     div_mensagem_email.innerHTML = mensagem_email;
 
-    // Validação da senha
+    
     var senha_caracter_especial =
         senhaVar.includes("@") ||
         senhaVar.includes("#") ||
@@ -170,12 +164,12 @@
         mensagem_senha += `A senha deve conter ao menos um caractere especial (@, #, $, !, %).<br>`;
         cadastro++;
     }
-
-    var senha_numero = /\d/.test(senhaVar);
-    if (!senha_numero) {
-        mensagem_senha += "A senha deve conter ao menos um número.<br>";
-        cadastro++;
-    }
+     
+   var senha_numero = senhaVar.includes("0") || senhaVar.includes("1") || senhaVar.includes("2") || senhaVar.includes("3") || senhaVar.includes("4") || senhaVar.includes("5") || senhaVar.includes("6") || senhaVar.includes("7") || senhaVar.includes("8") || senhaVar.includes("9")
+      if (senha_numero == false){
+        mensagem_senha += "Acrescente números<br>"
+        cadastro++
+      }
 
     var tamanho_senha = senhaVar.length;
     if (tamanho_senha < 8) {
@@ -206,14 +200,14 @@
     }
     div_mensagem_senha.innerHTML = mensagem_senha;
 
-    // Validação da confirmação da senha
+    
     if (senhaVar !== confirmacaoSenhaVar) {
         mensagem_senha_confirmacao = "As senhas não coincidem.";
         cadastro++;
     }
     div_mensagem_senha_confirmacao.innerHTML = mensagem_senha_confirmacao;
 
-    // Caso todas as validações passem
+   
     if (cadastro === 0) {
         fetch("/usuarios/cadastrar", {
             method: "POST",
@@ -255,30 +249,4 @@
     }
 }
 
-
-  
-
-  // Listando empresas cadastradas 
-  // function listar() {
-  //   fetch("/empresas/listar", {
-  //     method: "GET",
-  //   })
-  //     .then(function (resposta) {
-  //       resposta.json().then((empresas) => {
-  //         empresas.forEach((empresa) => {
-  //           listaEmpresasCadastradas.push(empresa);
-
-  //           console.log("listaEmpresasCadastradas")
-  //           console.log(listaEmpresasCadastradas[0].codigo_ativacao)
-  //         });
-  //       });
-  //     })
-  //     .catch(function (resposta) {
-  //       console.log(`#ERRO: ${resposta}`);
-  //     });
-  // }
-
-  function sumirMensagem() {
-    cardErro.style.display = "none";
-  }
 </script>

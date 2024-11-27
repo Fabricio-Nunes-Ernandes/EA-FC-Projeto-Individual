@@ -4,7 +4,7 @@ function obterPontosPorGenero(req, res) {
     modelo.buscarPontosPorGenero()
         .then((resultado) => {
             if (resultado.length > 0) {
-                res.json(resultado[0]); // Retorna os totais de pontos por gênero
+                res.json(resultado[0]); 
             } else {
                 res.status(404).send("Nenhum dado encontrado.");
             }
@@ -16,8 +16,7 @@ function obterPontosPorGenero(req, res) {
 }
 
 function obterDadosUsuario(req, res) {
-    const nomeUsuario = req.query.nome; // Obtém o nome do usuário da query string
-    
+    const nomeUsuario = req.query.nome; 
     if (!nomeUsuario) {
         res.status(400).send("Nome de usuário não fornecido.");
         return;
@@ -28,12 +27,12 @@ function obterDadosUsuario(req, res) {
             if (resultado.length > 0) {
                 res.json({
                     lista: resultado
-                }); // Retorna o primeiro resultado
+                }); 
             } else {
                 res.json({
                     lista: resultado
                 })
-                // res.status(404).send("Nenhum dado encontrado para o usuário.");
+                
             }
         })
         .catch((erro) => {

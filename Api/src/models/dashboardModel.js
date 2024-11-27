@@ -23,7 +23,7 @@ function buscarDadosUsuario(nomeUsuario) {
         `;
     
       
-    // Passando o valor do nomeUsuario corretamente como parâmetro
+    
     return database.executar(instrucaoSql, [nomeUsuario]);
 }
 

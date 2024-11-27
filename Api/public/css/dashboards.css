@@ -1,6 +1,4 @@
-/* dashboards.css */
 
-/* Reset básico */
 * {
   margin: 0;
   padding: 0;
@@ -9,31 +7,30 @@
 }
 
 body {
-  background-color: #2E2E2E; /* Fundo escuro */
   color: white;
   font-size: 16px;
 }
 
 :root {
-  --cor-destaque: #23CE68; /* Verde */
-  --cor-fundo-painel: #e5e5e5; /* Fundo dos painéis */
-  --cor-fundo-dark: #2E2E2E; /* Fundo escuro */
-  --cor-fundo-branco: #fff; /* Fundo branco */
-  --cor-borda: #23CE68; /* Cor da borda */
-  --espaco-padrão: 20px; /* Espaçamento padrão */
-  --altura-header: 80px; /* Altura do header */
+  --cor-destaque: #23CE68; 
+  --cor-fundo-painel: #e5e5e5; 
+  --cor-fundo-dark: #2E2E2E; 
+  --cor-fundo-branco: #fff; 
+  --cor-borda: #23CE68; 
+  --espaco-padrão: 20px; 
+  --altura-header: 80px;
 }
 
-/* Estrutura da janela principal */
+
 .janela {
   display: flex;
-  height: 100vh; /* A janela ocupa toda a altura da tela */
+  height: 100vh; 
   background-color: var(--cor-fundo-dark);
   padding: var(--espaco-padrão);
-  box-sizing: border-box;
+
 }
 
-/* Estilo para o menu lateral */
+
 .header-left {
   background-color: var(--cor-fundo-branco);
   width: 240px;
@@ -44,7 +41,6 @@ body {
   gap: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
   border-right: 6px solid var(--cor-destaque);
-  flex-shrink: 0; /* Impede que o menu lateral encolha */
 }
 
 .header-left img {
@@ -57,8 +53,7 @@ body {
   font-weight: 300;
 }
 
-.header-left .btn-nav,
-.header-left .btn-nav-white,
+
 .header-left .btn-logout {
   width: 100%;
   padding: 10px;
@@ -68,27 +63,6 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.header-left .btn-nav {
-  background-color: var(--cor-destaque);
-  color: #121212;
-  font-weight: bold;
-}
-
-.header-left .btn-nav-white a,
-.header-left .btn-nav-white {
-  background-color: transparent;
-  color: white;
-  font-weight: 400;
-  text-decoration: none;
-}
-
-.header-left .btn-nav:hover {
-  background-color: #1ca959;
-}
-
-.header-left .btn-nav-white:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
 
 .header-left .btn-logout {
   background-color: var(--cor-destaque);
@@ -96,8 +70,6 @@ body {
 }
 
 
-
-/* Painel de gráficos */
 .dash {
   display: flex;
   flex-direction: column;
@@ -105,26 +77,24 @@ body {
   background-color: var(--cor-fundo-painel);
   border-left: 6px solid var(--cor-destaque);
   flex-grow: 1; /* Faz o painel crescer */
-  height: calc(100vh - 40px); /* Ocupa toda a altura da tela, subtraindo 40px para margens */
+  height: calc(100vh - 40px);
   box-sizing: border-box;
-  overflow-y: auto; /* Permite rolagem se necessário */
 }
 
-/* Gráficos */
+
 #graficos {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  flex-grow: 1; /* Expande para preencher o espaço disponível */
+  flex-grow: 1; /* Faz o painel crescer */
 }
 
 span {
   color: #121212;
 }
 #myChartCanvas {
-  width: 100%;
-  width: 750px; /* Aumentei a largura para ocupar mais espaço */
+  width: 750px; 
   margin: 20px auto;
   background-color: white;
   padding: 20px;
@@ -132,11 +102,10 @@ span {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* A mesma alteração de largura para o gráfico */
 
 .graph {
   width: 100%;
-  max-width: 1300px; /* Aumentei a largura para ocupar mais espaço */
+  max-width: 1300px; 
   margin: 20px auto;
   background-color: var(--cor-destaque);
   padding: 20px;
@@ -144,61 +113,18 @@ span {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.graph canvas {
-  width: 100%;
-  height: auto;
-}
-
-/* Botões dos gráficos */
-#btnGrafico {
-  display: flex;
-  justify-content: center;
-  gap: 15px; /* Maior espaço entre os botões */
-  margin: 20px 0;
-}
-
-#btnGrafico .btn-white {
-  background-color: white;
-  color: #121212;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-#btnGrafico .btn-white:hover {
-  background-color: #f5f5f5;
-}
-
-#btnGrafico .btn-pink {
-  background-color: var(--cor-destaque);
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-/* Estilo para mensagens */
 #mensagemFeminino,
 #mensagemMasculino {
   font-size: 14px;
   text-align: center;
   padding: 10px;
-  background-color: rgba(0, 0, 0, 0.7);
   border-radius: 5px;
   margin-top: 10px;
-  max-width: 80%; /* Limitei o tamanho para não ocupar a tela inteira */
+  max-width: 80%; 
   margin: 10px auto;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   border: 2px solid var(--cor-borda);
+  background-color: var(--cor-destaque);
 }
 
-#mensagemFeminino {
-  background-color: var(--cor-destaque);
-  color: #E91E63;
-}
 
-#mensagemMasculino {
-  background-color: var(--cor-destaque);
-  color: #2196F3;
-}
