@@ -1,7 +1,5 @@
 /* Adicionar aqui toda a estilização criada para sua aplicação. */
 
-@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
 
 body {
      margin: 0;
@@ -13,7 +11,7 @@ body {
 
 :root {
     --tamanho-header: 80px;
-    --tamanho-banner: calc(70vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
+    --tamanho-banner: calc(75vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
     --tamanho-login: calc(100vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
     --tamanho-footer: 150px;
 }
@@ -57,36 +55,24 @@ body {
     align-items: center;
     justify-content: space-between;
     list-style: none;
-    
-
 }
 
 .titulo {
-    color: #32b9cd;
-
-    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    color: white;
 }
 
 .capa{
     height: var(--tamanho-banner);
-    width: 40%;
-    color: black;
-    margin-top: 10%;
-    margin-left: 5%;
+    width: 1600px;
+    margin-right: 10%;
     background-image: url('../img/capa.avif');
     background-size: cover;
     border-radius: 8px;
-}
-
-.capa .container{
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 80%;
-    margin: auto;
+    object-fit:fill 
 }
 
 
@@ -95,36 +81,8 @@ body {
     display: flex;
     border: 6px solid #23CE68;
     border-radius: 8px;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 50%;
 }
 
-.social .container .boxes{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 100%;
-    padding: 100px 0;
-    
-}
-
-.box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center; 
-    text-align: center;
-    width: 60%; 
-    padding: 10px;
-    padding-left: 250px;
-}
-
-.box p {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
 
 .footer {
     background-color: #ffff;
@@ -144,133 +102,70 @@ body {
 .footer img{
     height: 50px;
  }
-.version {
-    font-size: 12px;
-}
-
-.login  {
-    height: var(--tamanho-login);
-    background-image: url(../assets/imgs/bg-jelly-fish-para_outras_pags.png);
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-} 
-
-.card-login {
-    padding: 30px;
-    text-align: center;
-}
-
-.card {
-    background-color: #e5e5e5;
-    border-radius: 8px;
-    color: hotpink;
-    width: 40%;
-    margin: auto;
-    padding: 10px 70px;
-}
-
-.formulario {
-    display: flex;
-    flex-direction: column;
-    text-align: start;
-    justify-content: center;
-    align-items: center;
-    border-color: #32b9cd;
-}
-
-.botao{
-   color: white;
-   background-color: crimson;
-   border: none;
-   border-radius: 5px;
-   width: 23%;
-   height: 30px;
-   padding: 10px;
-   font-size: 16px;
-   font-weight: 600;
-   cursor: pointer;
-   display: flex; 
-   justify-content: center; 
-   align-items: center;
-   margin-bottom: 10px;
-   margin-top: 10px;
-  }
-
-.formulario .campo {
-    margin-bottom: 15px;
-    width: 100%;
-    
-}
-
-.formulario span {
-    font-size: 14px;
-    font-weight: 700;
-}
-
-input {
-    width: 100%;
-    padding: 10px;
-    padding-top: 2px;
-    font-size: 14px;
-    font-weight: 500;
-    border: 2px solid #32b9cd;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-input::placeholder {
-    color: #bbb;
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-}
-
-.login h2{
-    font-size: 30px;
-    margin-bottom: 1px;
-    margin-top: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;   
-}
 
 .gallery-container {
-    text-align: center; /* Centraliza o título da galeria */
-    margin: 20px auto;
+    text-align: center; 
+    margin-top: 100px;
+    margin-bottom: 100px;
   }
   
   .gallery-title {
-    font-size: 24px; /* Tamanho do título */
-    margin-bottom: 20px; /* Espaço entre o título e as imagens */
+    font-size: 24px; 
+    margin-bottom: 20px;
     color: white;
   }
   
   .gallery {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 colunas por fileira */
-    gap: 15px; /* Espaço entre as imagens */
-    margin: 0 auto; /* Centraliza a galeria na página */
-    width: 80%; /* Largura da galeria */
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 15px; 
+    margin: 0 auto; 
+    width: 80%;
   }
   
   .gallery img {
-    width: 100%; /* Largura da imagem preenche o espaço */
-    height: 200px; /* Altura fixa */
-    object-fit: contain; /* Mantém a imagem inteira, sem cortar */
-    background-color: #f0f0f0; /* Fundo neutro */
-    border-radius: 8px; /* Cantos arredondados */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve */
+    width: 100%; 
+    height: 200px; 
+    object-fit: contain; 
+    background-color: #f0f0f0; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
   }
   
-  /* Centraliza a última imagem se ela estiver sozinha na última fileira */
   .gallery img:nth-last-child(1) {
-    grid-column: span 5; /* A última imagem ocupa 5 colunas */
-    justify-self: center; /* Centraliza a imagem horizontalmente */
+    grid-column: span 5; 
+    justify-self: center; 
   }
 
   .gallery img:hover {
-    transform: scale(1.05); /* Aumenta um pouco a imagem ao passar o mouse */
+    transform: scale(1.05); 
   }
   
+  .social-sobre{
+    background-color: #e5e5e5;
+    display: flex;
+    border: 6px solid #23CE68;
+    border-radius: 8px;
+    width: 60%;
+    margin: auto;
+    margin-bottom: 100px;
+}
+
+.container-sobre{
+    width: 80%;
+    margin: auto;
+    
+}
+
+.Sobre-mim {
+    text-align: center;
+    font-size: 24px; 
+    margin-bottom: 20px;
+    margin-top: 100px;
+    color: white;
+  }
+
+  .horas{
+    text-align: center;
+  }
