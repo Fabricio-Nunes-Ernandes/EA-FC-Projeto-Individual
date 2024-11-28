@@ -320,7 +320,7 @@
 
   function submeter() {
     
-    const options = document.getElementsByName("option"); // recupera alternativas no html
+    const options = document.getElementsByName("option"); 
 
     let hasChecked = false
     for (let i = 0; i < options.length; i++) {
@@ -440,7 +440,7 @@
     document.getElementById('btnTentarNovamente').style.display = "flex";
     let textoParaMensagemFinal = null;
 
-    // Calculando pontos possíveis
+    
     let pontos_possiveis = 0;
     listaDeQuestoes.forEach((questao) => {
         if (questao.dificuldade === "facil") {
@@ -519,7 +519,7 @@ function registrarTentativaQuiz() {
         return false;
     } 
 
-    // Envio dos dados via fetch
+   
     fetch("/quiz/registrarTentativa", {
         method: "POST",
         headers: {

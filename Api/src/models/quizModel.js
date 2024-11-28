@@ -29,7 +29,7 @@ function obterUltimaTentativa(fkUsuario) {
     `;
     console.log("Executando SQL para obter a última tentativa: \n" + instrucaoSql);
 
-    return database.executar(instrucaoSql); // Retorna o resultado da consulta SQL
+    return database.executar(instrucaoSql); 
 }
 
 

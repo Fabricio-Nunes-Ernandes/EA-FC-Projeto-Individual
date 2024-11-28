@@ -8,10 +8,7 @@ function registrarTentativa(req, res) {
     var genero = req.body.generoServer;
     var fkUsuario = req.body.fkUsuarioServer;
 
-    // if (!titulo || !resposta || !pontos || !genero || !fkUsuario) {
-    //     console.error("Dados ausentes no body:", req.body);
-    //     return res.status(400).send("Dados inválidos! Certifique-se de enviar todos os campos necessários.");
-    // }
+ 
 
     let tentativaAtual = req.body.TentativaServer || 1;
 

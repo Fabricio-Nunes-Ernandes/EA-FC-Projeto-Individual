@@ -24,13 +24,7 @@ resposta varchar(45),
 pontos int,
 genero varchar(9),
 fkUsuario int,
-constraint fkUsurioTentativa foreign key (fkUsuario) references usuario(idUsuario)
+constraint fkUsurioTentativa foreign key (fkUsuario) references usuario(idUsuario),
+tentativaAtual int
 );
 
-create table ranking(
-idRanking int primary key auto_increment,
-pontos_total int,
-posicao int,
-fkTentativa int,
-constraint fkRankTentativa foreign key (fkTentativa) references tentativa (idTentativa)
-);

@@ -26,7 +26,7 @@
 
 <body>
     <div class="janela">
-        <!-- Menu lateral esquerdo -->
+        
         <div class="header-left">
             <img src="./../img/ea logo.png" alt="">
 
@@ -201,22 +201,7 @@ function exibirMensagemPersonalizada(a, b, lista, totalFeminino, totalMasculino)
 
     //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     //     Para ajustar o "select", ajuste o comando sql em src/models
-    // function obterPontosPorGenero() {
-    //     fetch("/dashboard/pontos-por-genero")
-    //         .then((response) => {
-    //             if (response.ok) {
-    //                 return response.json();
-    //             } else {
-    //                 throw new Error("Erro ao buscar dados do gráfico.");
-    //             }
-    //         })
-    //         .then((dados) => {
-    //             plotarGraficoDeGenero(dados);
-    //         })
-    //         .catch((erro) => {
-    //             console.error("Erro ao obter pontos por gênero:", erro);
-    //         });
-    // }
+   
 
     function obterPontosPorGenero() {
     fetch("/dashboard/pontos-por-genero")
