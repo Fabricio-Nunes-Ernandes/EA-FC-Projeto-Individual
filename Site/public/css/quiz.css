@@ -260,7 +260,7 @@ input[type="radio"] {
 h3{
     background-color: white;
     padding: 30px;
-    border: 5px solid #23CE68; 
+    border: 5px solid var(--primary-brand-color); 
     border-radius: 8px;
 
 }
@@ -268,7 +268,7 @@ h3{
 
 .header{
    height: var(--tamanho-header);
-   border-bottom: 6px solid #23CE68;
+   border-bottom: 6px solid var(--primary-brand-color);
    background-color: #ffff;
 
 }
@@ -314,7 +314,7 @@ h3{
     justify-content: space-between; 
     padding: 20px;
     font-size: 15px;
-    border-top: 6px solid #23CE68;
+    border-top: 6px solid var(--primary-brand-color);
 }
 
 .footer .container{
